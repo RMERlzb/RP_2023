@@ -35,10 +35,12 @@ chassis\gimbal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\gimbal.o: ..\Application\DeviceLayer\gimbal_motor\gimbal_motor.h
 chassis\gimbal.o: ..\Application\ConfigLayer\rp_device_config.h
 chassis\gimbal.o: E:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
-chassis\gimbal.o: ..\Application\ConfigLayer\rp_driver_config.h
-chassis\gimbal.o: ..\Application\AlgorithmLayer\pid.h
 chassis\gimbal.o: ..\Application\ConfigLayer\rp_user_config.h
+chassis\gimbal.o: ..\Application\ConfigLayer\rp_driver_config.h
+chassis\gimbal.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\gimbal.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\gimbal.o: ..\Application\ConfigLayer\rp_user_define.h
+chassis\gimbal.o: ..\Application\AlgorithmLayer\pid.h
 chassis\gimbal.o: ..\Application\ProtocolLayer\can_protocol.h
 chassis\gimbal.o: ..\Application\DriverLayer\drv_can.h
 chassis\gimbal.o: ../Core/Inc/can.h
@@ -67,9 +69,10 @@ chassis\gimbal.o: ../Drivers/CMSIS/Include/core_cm4.h
 chassis\gimbal.o: E:\Keil5\ARM\ARMCC\Bin\..\include\math.h
 chassis\gimbal.o: ..\Application\DriverLayer\drv_io.h
 chassis\gimbal.o: ..\Application\DeviceLayer\gimbal\gimbal.h
-chassis\gimbal.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\gimbal.o: ..\Application\DeviceLayer\chassis\chassis.h
 chassis\gimbal.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
 chassis\gimbal.o: ..\Application\ConfigLayer\rp_config.h
 chassis\gimbal.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\gimbal.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\gimbal.o: ..\Application\DeviceLayer\Servo\Servo.h
+chassis\gimbal.o: ../Core/Inc/tim.h

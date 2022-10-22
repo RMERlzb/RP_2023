@@ -8,6 +8,8 @@
 #include "rp_user_define.h"
 #include "gimbal.h"  
 #include "RC_Dial_Task.h"
+#include "shoot.h"
+#include "Servo.h"
 /*
 	任务优先级高于普通
 	tick用于在500ms后一直给底盘和云台发送0数组

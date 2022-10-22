@@ -1,10 +1,5 @@
 chassis\chassis_motor.o: ..\Application\DeviceLayer\chassis_motor\chassis_motor.c
 chassis\chassis_motor.o: ..\Application\DeviceLayer\chassis_motor\chassis_motor.h
-chassis\chassis_motor.o: ../Core/Inc/main.h
-chassis\chassis_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
-chassis\chassis_motor.o: ../Core/Inc/stm32f4xx_hal_conf.h
-chassis\chassis_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
-chassis\chassis_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 chassis\chassis_motor.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 chassis\chassis_motor.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
 chassis\chassis_motor.o: ../Drivers/CMSIS/Include/core_cm4.h
@@ -15,6 +10,10 @@ chassis\chassis_motor.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 chassis\chassis_motor.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 chassis\chassis_motor.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 chassis\chassis_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+chassis\chassis_motor.o: ../Core/Inc/stm32f4xx_hal_conf.h
+chassis\chassis_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
+chassis\chassis_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
+chassis\chassis_motor.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 chassis\chassis_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
 chassis\chassis_motor.o: E:\Keil5\ARM\ARMCC\Bin\..\include\stddef.h
 chassis\chassis_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
@@ -35,7 +34,8 @@ chassis\chassis_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_e
 chassis\chassis_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\chassis_motor.o: ..\Application\ConfigLayer\rp_device_config.h
 chassis\chassis_motor.o: E:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
-chassis\chassis_motor.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\chassis_motor.o: ..\Application\ConfigLayer\rp_user_config.h
-chassis\chassis_motor.o: ..\Application\AlgorithmLayer\pid.h
+chassis\chassis_motor.o: ..\Application\ConfigLayer\rp_driver_config.h
+chassis\chassis_motor.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\chassis_motor.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\chassis_motor.o: ..\Application\ConfigLayer\rp_user_define.h

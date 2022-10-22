@@ -38,9 +38,10 @@ chassis\can_protocol.o: ../Core/Inc/main.h
 chassis\can_protocol.o: ..\Application\DeviceLayer\chassis_motor\chassis_motor.h
 chassis\can_protocol.o: ..\Application\ConfigLayer\rp_device_config.h
 chassis\can_protocol.o: E:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
-chassis\can_protocol.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\can_protocol.o: ..\Application\ConfigLayer\rp_user_config.h
-chassis\can_protocol.o: ..\Application\AlgorithmLayer\pid.h
+chassis\can_protocol.o: ..\Application\ConfigLayer\rp_driver_config.h
+chassis\can_protocol.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\can_protocol.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\can_protocol.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\can_protocol.o: ..\Application\DeviceLayer\gimbal_motor\gimbal_motor.h
 chassis\can_protocol.o: ..\Application\DeviceLayer\shoot_motor\shoot_motor.h

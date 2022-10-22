@@ -4,8 +4,11 @@
 #include "stm32f4xx.h"   
 #include "cmsis_os.h"
 #include "string.h"
-#include "drv_can.h"
-#include "rp_user_define.h"
-extern void StartShootTask(void const * argument);
+
+#include "rp_device_config.h"
+#include "RC_Dial_Task.h"
+#include "shoot.h"
+
+extern void StartShoot_Task(void const * argument);
 
 #endif

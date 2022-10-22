@@ -3,7 +3,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "rp_config.h"
-
+#include "string.h"
+#include "rp_user_define.h"
 /* Exported macro ------------------------------------------------------------*/
 /* ----------------------- RC Channel Definition------------------------------*/
 
@@ -108,24 +109,65 @@ typedef struct rc_sensor_info_struct {
 
 } rc_sensor_info_t;
 
+typedef struct rc_sensor_dial_struct {
+	
+	char 	This_LeftDial_Mode;
+	char 	Last_LeftDial_Mode;
+	
+	char 	This_RightDial_Mode;
+	char 	Last_RightDial_Mode;
+	
+	char  Mechanical_Mode;
+	char  Imu_Mode;
+	char	This_Gryo_Mode;
+	char  Last_Gryo_Mode;
+	
+	char  Continue_ShootEnable;
+	char  FricWheel_WorkEnable;
+	char 	Single_ShootEnable;
+	
+	char	Var_Change_Enable;
+	
+	char  Continue_Shoot_BlockFlag;
+	char  Single_Shoot_BlockFlag;	
+	
+	char  ContinueShoot_Block_ToggleDir;
+	char  SingleShoot_Block_ToggleDir;
+	
+	char  Cover_OpenEnable;
+	
+	uint32_t  ContinueShoot_Cnt;
+	uint32_t  SingleShoot_Cnt;
+	
+} rc_sensor_dial_t;
+
+
 typedef struct rc_sensor_struct {
+	
 	rc_sensor_info_t	*info;
-	drv_uart_t			*driver;
+	rc_sensor_dial_t  *dial;
+	drv_uart_t			  *driver;
+	
 	void				(*init)(struct rc_sensor_struct *self);
 	void				(*update)(struct rc_sensor_struct *self, uint8_t *rxBuf);
 	void				(*check)(struct rc_sensor_struct *self);	
 	void				(*heart_beat)(struct rc_sensor_struct *self);
+	void				(*dial_reset)(struct rc_sensor_struct *self);
+	void				(*dial_jugde)(struct rc_sensor_struct *self);
+	
 	dev_work_state_t	work_state; 
-	dev_state_tran_t  tran_state;
+	dev_state_tran_t  tran_state;///////////加的，用来解决上电后机械复位
 	dev_errno_t			errno;
 	dev_id_t			id;
+	
+	
 } rc_sensor_t;
 
 extern rc_sensor_info_t rc_sensor_info;
+extern rc_sensor_dial_t rc_sensor_dial;
 extern rc_sensor_t 		rc_sensor;
 /* Exported functions --------------------------------------------------------*/
 
 bool RC_IsChannelReset(void);
-void RC_ResetData(rc_sensor_t *rc);
-	
+
 #endif

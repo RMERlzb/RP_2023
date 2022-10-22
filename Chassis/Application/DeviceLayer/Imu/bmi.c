@@ -338,9 +338,12 @@ float q0temp,q1temp,q2temp,q3temp;
 
 uint8_t BMI_Get_EulerAngle(float *pitch,float *roll,float *yaw,short *ggx,short *ggy,short *ggz,short *aax,short *aay,short *aaz)
 { 
+	
 	gx =*ggx ;
 	gy =*ggy ;
 	gz = (int16_t)(*ggz /3) *3 ;    // 死区处理，减小yaw漂移速度
+	
+	
 	ax =*aax;
 	ay =*aay;
 	az =*aaz;
@@ -349,19 +352,23 @@ uint8_t BMI_Get_EulerAngle(float *pitch,float *roll,float *yaw,short *ggx,short 
 	{
 		return 0;
 	}		
-
+	//解算出度每秒
 	gx = lsb_to_dps(gx,2000,bmi2_dev.resolution);
 	gy = lsb_to_dps(gy,2000,bmi2_dev.resolution);
 	gz = lsb_to_dps(gz,2000,bmi2_dev.resolution);
 	
+	
+	//转变成弧度每秒
 	gx = gx * 0.0174f;
 	gy = gy * 0.0174f;
 	gz = gz * 0.0174f;
 
+	//米每二次方秒
 	ax = lsb_to_mps2(ax,2,bmi2_dev.resolution);
 	ay = lsb_to_mps2(ay,2,bmi2_dev.resolution);
 	az = lsb_to_mps2(az,2,bmi2_dev.resolution);	
-
+	
+	//加速度计矫正开始
 	norm = inVSqrt(ax*ax + ay*ay + az*az);
 	ax = ax *norm;
 	ay = ay *norm;
@@ -383,15 +390,21 @@ uint8_t BMI_Get_EulerAngle(float *pitch,float *roll,float *yaw,short *ggx,short 
 	gy = gy + Kp*ey + eyInt;
 	gz = gz + Kp*ez + ezInt; 
 	
+	
+	
 	q0temp=q0;  
-    q1temp=q1;  
-    q2temp=q2;  
-    q3temp=q3; 
+  q1temp=q1;  
+  q2temp=q2;  
+  q3temp=q3; 
 	
 	q0 = q0temp + (-q1temp*gx - q2temp*gy -q3temp*gz)*halfT;
 	q1 = q1temp + (q0temp*gx + q2temp*gz -q3temp*gy)*halfT;
 	q2 = q2temp + (q0temp*gy - q1temp*gz +q3temp*gx)*halfT;
 	q3 = q3temp + (q0temp*gz + q1temp*gy -q2temp*gx)*halfT;
+	
+	
+	//加速度计矫正结束
+	
 	
 	norm = inVSqrt(q0*q0 + q1*q1 + q2*q2 + q3*q3);
 	q0 = q0 * norm;

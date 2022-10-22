@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx ,USE_STDPERIPH_DRIVER,__FPU_PRESENT = 1U,ARM_MATH_CM4,__CC_ARM,__TARGET_FPU_VFP,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\Application\DriverLayer;..\Application\ProtocolLayer;..\Application\ConfigLayer;..\Application\DeviceLayer\Sensor;..\Application\AlgorithmLayer;..\Application\DeviceLayer\chassis_motor;..\Application\DeviceLayer\chassis;..\Application\DeviceLayer\gimbal;..\Application\DeviceLayer\gimbal_motor;..\Application\DeviceLayer\Imu;..\Drivers\CMSIS\DSP\Include;..\Application\TaskLayer;..\Application\DeviceLayer\shoot_motor</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\Application\DriverLayer;..\Application\ProtocolLayer;..\Application\ConfigLayer;..\Application\DeviceLayer\Sensor;..\Application\AlgorithmLayer;..\Application\DeviceLayer\chassis_motor;..\Application\DeviceLayer\chassis;..\Application\DeviceLayer\gimbal;..\Application\DeviceLayer\gimbal_motor;..\Application\DeviceLayer\Imu;..\Drivers\CMSIS\DSP\Include;..\Application\TaskLayer;..\Application\DeviceLayer\shoot_motor;..\Application\DeviceLayer\shoot;..\Application\DeviceLayer\motor;..\Application\DeviceLayer\Servo</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -414,6 +414,61 @@
               <FileName>dma.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/tim.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>1</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
             </File>
             <File>
               <FileName>usart.c</FileName>
@@ -775,6 +830,36 @@
               <FileType>5</FileType>
               <FilePath>..\Application\DeviceLayer\shoot_motor\shoot_motor.h</FilePath>
             </File>
+            <File>
+              <FileName>shoot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\shoot\shoot.c</FilePath>
+            </File>
+            <File>
+              <FileName>shoot.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\DeviceLayer\shoot\shoot.h</FilePath>
+            </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\motor\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\DeviceLayer\motor\motor.h</FilePath>
+            </File>
+            <File>
+              <FileName>Servo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\Servo\Servo.c</FilePath>
+            </File>
+            <File>
+              <FileName>Servo.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\DeviceLayer\Servo\Servo.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -854,6 +939,16 @@
               <FileName>Shoot_Task.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Application\TaskLayer\Shoot_Task.h</FilePath>
+            </File>
+            <File>
+              <FileName>Gimbal_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\TaskLayer\Gimbal_Task.c</FilePath>
+            </File>
+            <File>
+              <FileName>Gimbal_Task.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Application\TaskLayer\Gimbal_Task.h</FilePath>
             </File>
           </Files>
         </Group>

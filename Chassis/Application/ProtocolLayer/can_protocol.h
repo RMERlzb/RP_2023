@@ -22,8 +22,8 @@
 #define GIMBAL_CAN_ID_LOW 	(0x205U)
 #define GIMBAL_CAN_ID_HIGH  (0x206U)
 
-#define Shoot_RubMotor_R	(0x201U)
-#define Shoot_RubMotor_L	(0x202U)
+#define Shoot_FricWheel_L	(0x201U)
+#define Shoot_FricWheel_R	(0x202U)
 #define Shoot_DialMotor		(0x203U)
 #define Shoot_GunMotor		(0x204U)
 

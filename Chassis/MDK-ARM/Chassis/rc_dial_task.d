@@ -52,4 +52,5 @@ chassis\rc_dial_task.o: E:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 chassis\rc_dial_task.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\rc_dial_task.o: ..\Application\ConfigLayer\rp_device_config.h
 chassis\rc_dial_task.o: ..\Application\ConfigLayer\rp_user_config.h
+chassis\rc_dial_task.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 chassis\rc_dial_task.o: ..\Application\ConfigLayer\rp_user_define.h

@@ -8,15 +8,9 @@
 //6020给正的输入值会逆时针转，给负的输入值会顺时针转
 
 
-//陀螺仪模式下角度增量变化率，注意是负的
-#define imu_angle_target_change_rate  -0.0005f
-
-//机械模式下pitch方向电机的角度目标增量变化率
-#define mec_angle_target_change_rate  -0.01f
-
 //底盘最大速度和初始速度增加比例
-#define V_Max  					8000
-#define V_Rate					V_Max/660
+#define Chassis_VMax  		8000
+#define V_Rate					Chassis_VMax/660
 
 //云台的pitch极限值
 #define gimbal_pitchmax  22.5f
@@ -25,9 +19,11 @@
 //底盘正方向的Z轴和Y轴的机械中值
 #define mechanical_Z  				2050
 #define mechanical_Y  				6800
+#define tail_mechanical				6050
 
-//6020电机最大的角度
-#define gimbal_angle_max  		8192
+
+//RM电机最大角度
+#define RMmotor_angle_max  		8192
 
 //pitch方向的6020电机的极限的角度
 #define gimbal_angle_Ymax  		7300		//头低着的时候
@@ -38,17 +34,25 @@
 #define Chassis_Control_ID 		0x200
 #define Shoot_Control_ID			0x200
 
-//拨码位置对应的模式值
+//拨码位置对应的模式值(从上往下 1---3---2)
 					//左
 #define imu_mode 				3
 #define mec_mode 				2
 #define keyboard_mode		1
-	
-//小陀螺模式下speed_z的赋值
-#define Gryo_Speed_Z    300
 
-//将云台角度8192转变为360°的比例
-#define Mec_To_Angle_Rate		( gimbal_angle_max / 360 )
+	//陀螺仪模式下的右拨码
+#define continue_shot_mode			1
+#define fricwheel_state_trans		2	
+
+	//机械模式下的右拨码
+#define single_shot_mode				1
+#define cover_state_trans				2
+
+//小陀螺模式下speed_z的赋值
+#define Gryo_Speed_Z    250
+
+//角度8192转变为360°的比例
+#define Mec_To_Angle_Rate		( RMmotor_angle_max / 360 )   //22.75差不多
 
 //弧度转换比例
 #define Radian_Rate 57.f
@@ -56,4 +60,6 @@
 //低通滤波比例
 #define	FilterRate  0.2f
 
+//枪管子弹发射的最大速度
+#define Shoot_Vmax	2000	
 #endif

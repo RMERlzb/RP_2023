@@ -38,3 +38,5 @@ chassis\rc_protocol.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\rc_protocol.o: ..\Application\ConfigLayer\rp_device_config.h
 chassis\rc_protocol.o: ..\Application\ConfigLayer\rp_user_config.h
 chassis\rc_protocol.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
+chassis\rc_protocol.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
+chassis\rc_protocol.o: ..\Application\ConfigLayer\rp_user_define.h

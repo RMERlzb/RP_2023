@@ -48,6 +48,7 @@ chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 chassis\main.o: ../Core/Inc/can.h
 chassis\main.o: ../Core/Inc/dma.h
+chassis\main.o: ../Core/Inc/tim.h
 chassis\main.o: ../Core/Inc/usart.h
 chassis\main.o: ../Core/Inc/gpio.h
 chassis\main.o: ..\Application\DriverLayer\drv_uart.h

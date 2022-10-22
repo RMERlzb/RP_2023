@@ -37,5 +37,7 @@ chassis\rc_sensor.o: E:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 chassis\rc_sensor.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\rc_sensor.o: ..\Application\ConfigLayer\rp_device_config.h
 chassis\rc_sensor.o: ..\Application\ConfigLayer\rp_user_config.h
+chassis\rc_sensor.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
+chassis\rc_sensor.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\rc_sensor.o: ..\Application\AlgorithmLayer\rp_math.h
 chassis\rc_sensor.o: ..\Application\ProtocolLayer\rc_protocol.h

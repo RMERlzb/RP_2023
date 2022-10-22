@@ -34,7 +34,8 @@ chassis\shoot_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.
 chassis\shoot_motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\shoot_motor.o: ..\Application\ConfigLayer\rp_device_config.h
 chassis\shoot_motor.o: E:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
-chassis\shoot_motor.o: ..\Application\ConfigLayer\rp_driver_config.h
-chassis\shoot_motor.o: ..\Application\AlgorithmLayer\pid.h
 chassis\shoot_motor.o: ..\Application\ConfigLayer\rp_user_config.h
+chassis\shoot_motor.o: ..\Application\ConfigLayer\rp_driver_config.h
+chassis\shoot_motor.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\shoot_motor.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\shoot_motor.o: ..\Application\ConfigLayer\rp_user_define.h

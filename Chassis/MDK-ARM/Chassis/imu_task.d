@@ -51,6 +51,10 @@ chassis\imu_task.o: ..\Application\AlgorithmLayer\pid.h
 chassis\imu_task.o: ..\Application\ConfigLayer\rp_user_config.h
 chassis\imu_task.o: E:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 chassis\imu_task.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\imu_task.o: ..\Application\ConfigLayer\rp_device_config.h
+chassis\imu_task.o: ..\Application\ConfigLayer\rp_driver_config.h
+chassis\imu_task.o: ..\Application\DeviceLayer\motor\motor.h
+chassis\imu_task.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\imu_task.o: ..\Application\DeviceLayer\Imu\bmi.h
 chassis\imu_task.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
 chassis\imu_task.o: ../Drivers/CMSIS/Include/core_cm4.h
@@ -59,8 +63,6 @@ chassis\imu_task.o: ..\Application\DriverLayer\drv_io.h
 chassis\imu_task.o: ../Core/Inc/main.h
 chassis\imu_task.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\imu_task.o: ..\Application\DeviceLayer\gimbal_motor\gimbal_motor.h
-chassis\imu_task.o: ..\Application\ConfigLayer\rp_device_config.h
-chassis\imu_task.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\imu_task.o: ..\Application\ProtocolLayer\can_protocol.h
 chassis\imu_task.o: ..\Application\DriverLayer\drv_can.h
 chassis\imu_task.o: ../Core/Inc/can.h
@@ -70,7 +72,8 @@ chassis\imu_task.o: ..\Application\TaskLayer\Imu_Task.h
 chassis\imu_task.o: ..\Application\DeviceLayer\chassis\chassis.h
 chassis\imu_task.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
 chassis\imu_task.o: ..\Application\ConfigLayer\rp_config.h
-chassis\imu_task.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\imu_task.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\imu_task.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\imu_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\imu_task.o: ..\Application\DeviceLayer\Servo\Servo.h
+chassis\imu_task.o: ../Core/Inc/tim.h
