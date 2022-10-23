@@ -8,6 +8,8 @@ void StartGimbal_Task(void const * argument)
   {
 		if( rc_sensor.work_state == DEV_ONLINE )
 		{
+		
+			
 			
 			if ( Mec_Return_flag == True )
 			{
@@ -18,7 +20,10 @@ void StartGimbal_Task(void const * argument)
 								
 				//»úÐµÄ£Ê½
 				else if ( rc_sensor_dial.Mechanical_Mode == True )
-					MEC_Mode();										
+				{
+					MEC_Mode();
+				}
+										
 			
 				
 				Gimbal_Send();

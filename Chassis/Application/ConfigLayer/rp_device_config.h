@@ -23,13 +23,31 @@
  *	@class	device
  */
 typedef enum {
-	DEV_ID_RC = 0,
-	DEV_ID_IMU = 1,
-	DEV_ID_CHASSIS_LF = 2,
-	DEV_ID_CHASSIS_RF = 3,
-	DEV_ID_CHASSIS_LB = 4,
-	DEV_ID_CHASSIS_RB = 5,
-	DEV_ID_CNT = 6,
+	DEV_ID_NONE,
+    DEV_ID_RC,   
+    DEV_ID_IMU, 
+
+		DEV_ID_JUDGE,
+	  DEV_ID_VISION,
+	
+    DEV_ID_POWER_0,
+    DEV_ID_POWER_1,
+    DEV_ID_POWER_2,
+    DEV_ID_POWER_3,
+		
+    DEV_ID_TURN_0,
+    DEV_ID_TURN_1,
+    DEV_ID_TURN_2,
+    DEV_ID_TURN_3,		
+
+    DEV_ID_FRIC_L,
+    DEV_ID_FRIC_R,
+    DEV_ID_BOX,
+    DEV_ID_BARREL,
+		
+    DEV_ID_GIMB_Y,
+    DEV_ID_GIMB_P,
+		DEV_ID_CNT,
 } dev_id_t;
 
 /**

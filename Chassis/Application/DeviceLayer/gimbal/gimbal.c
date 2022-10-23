@@ -28,6 +28,8 @@ void mec_pid_cal(void);
 
 void Cover_State_Judge(void);
 
+
+	
 void Gimbal_Reset(void)
 {
 	
@@ -118,7 +120,7 @@ void MEC_Mode(void)
 	imu_pid_Y.imu_angle_pid->target = pitch;
 	
 	Cover_State_Judge();
-		
+	
 	mec_pid_cal();
 
 }
@@ -190,21 +192,52 @@ void imu_pid_cal(void)
 	pid_ctrl_t* speed_pid_temp;
 	
 	
+//---------------------------目标值的更改地方-------------------------//	
+	//如果开启视觉控制
+	if( rc_sensor_dial.Version_Control_Enable == True )
+	{			
+		
+		imu_pid_Z.imu_angle_pid->target = vision_sensor_info.RxPacket.RxData.yaw_angle / 22.7555f - 180;
+		
+		
+		imu_pid_Y.imu_angle_pid->target = vision_sensor_info.RxPacket.RxData.pitch_angle / 22.7555f - 180;
+				
+	}
+	
+	//开启了视觉就不能再用遥控器控制云台
+	else
+	{
+		//陀螺仪模式下角度增量变化率，注意是负的
+		imu_pid_Z.imu_angle_pid->target += (rc_sensor.info)->ch0 * -0.0005f;
+			
+		imu_pid_Y.imu_angle_pid->target += (rc_sensor.info)->ch1 * -0.0008f ;
+	
+		
+	}
 	
 	
 //--------------------------------------Z轴的--------------------------------//
 	angle_pid_temp = imu_pid_Z.imu_angle_pid;
 	speed_pid_temp = imu_pid_Z.imu_speed_pid;
 	
-	//目标值，误差，反馈
-	angle_pid_temp->target += (rc_sensor.info)->ch0 * -0.0005f;//陀螺仪模式下角度增量变化率，注意是负的
-	MyRampFloat (&angle_pid_temp->target, yaw, 180, &angle_pid_temp->err);
+
+//----------------------------------计算------------------------------//
+	
+//-------------外环	
 	angle_pid_temp->measure = yaw;
-	
-	//计算
+	MyRampFloat (&imu_pid_Z.imu_angle_pid->target, yaw, 180, &imu_pid_Z.imu_angle_pid->err);
+	angle_pid_temp->err = imu_pid_Z.imu_angle_pid->err;
 	single_pid_ctrl ( angle_pid_temp, angle_pid_temp->err );
-	single_pid_ctrl ( speed_pid_temp, angle_pid_temp->out - ggz * cos( pitch / Radian_Rate ) );
 	
+	
+//-------------内环	
+	speed_pid_temp->target =  angle_pid_temp->out;
+	speed_pid_temp->measure = ggz;
+	speed_pid_temp->err = speed_pid_temp->target - speed_pid_temp->measure;
+	single_pid_ctrl ( speed_pid_temp, speed_pid_temp->err );
+	
+	
+//-------------------------------填充数组--------------------------//	
 	gimbal_txbuf[0] = (int16_t) speed_pid_temp->out>>8;
 	gimbal_txbuf[1] = (int16_t) speed_pid_temp->out;
 	
@@ -216,17 +249,24 @@ void imu_pid_cal(void)
 //--------------------------------------Y轴的--------------------------------//	
 	angle_pid_temp = imu_pid_Y.imu_angle_pid;
 	speed_pid_temp = imu_pid_Y.imu_speed_pid;
-	
-	//目标值，误差，反馈	
-	angle_pid_temp->target += (rc_sensor.info)->ch1 * -0.0008f ;
-	ConstrainFloat( &angle_pid_temp->target, gimbal_pitchmax, gimbal_pitchmin);
-	angle_pid_temp->err = angle_pid_temp->target - pitch;
+
+
+//----------------------------------计算------------------------------//
+//-------------外环	
+	ConstrainFloat( &imu_pid_Y.imu_angle_pid->target, gimbal_pitchmax, gimbal_pitchmin);
 	angle_pid_temp->measure = pitch;
+	angle_pid_temp->err = angle_pid_temp->target - angle_pid_temp->measure;
+	single_pid_ctrl ( angle_pid_temp, angle_pid_temp->err );
+
+
+//-------------内环	
+	speed_pid_temp->target =  angle_pid_temp->out;
+	speed_pid_temp->measure = ggy;
+	speed_pid_temp->err = speed_pid_temp->target - ggy ;
+	single_pid_ctrl ( speed_pid_temp, speed_pid_temp->err );
 	
-	//计算
-	single_pid_ctrl (angle_pid_temp, angle_pid_temp->err );
-	single_pid_ctrl (speed_pid_temp, angle_pid_temp->out - ggy);
-	
+
+//-------------------------------填充数组--------------------------//		
 	gimbal_txbuf[2] = (int16_t) speed_pid_temp->out>>8;
 	gimbal_txbuf[3] = (int16_t) speed_pid_temp->out;
 	
@@ -359,29 +399,67 @@ void machinery_pid_init(void)
 
 void mec_pid_cal(void)
 {
-	//Y轴
-	machinery_pid_Y.gimbal_angle_pid->target += (rc_sensor.info)->ch1 * -0.005f;
+
+//----------------------------Y轴---------------------------//
+	
+	//----外环目标值---//	
+	machinery_pid_Y.gimbal_angle_pid->target += (rc_sensor.info)->ch1 * -0.005f;		
 	ConstrainFloat( &machinery_pid_Y.gimbal_angle_pid->target, gimbal_angle_Ymax, gimbal_angle_Ymin);	
+
+	
+	//----外环测量值和误差----//	
 	gimbal_motor[GIMBAL_HIGH].angle_pid_update(&gimbal_motor[GIMBAL_HIGH]);
+
 	
-	//pitch轴串级PID输出
+	//----外环的计算-------//
 	single_pid_ctrl ( machinery_pid_Y.gimbal_angle_pid, machinery_pid_Y.gimbal_angle_pid->err );
-	single_pid_ctrl ( machinery_pid_Y.imu_speed_pid, machinery_pid_Y.gimbal_angle_pid->out - ggy );
 	
+	
+	
+	//-----内环目标值----//
+	machinery_pid_Y.imu_speed_pid->target = machinery_pid_Y.gimbal_angle_pid->out;
+	
+	
+	//-----内环测量值和误差----//
+	machinery_pid_Y.imu_speed_pid->measure = ggy * cos( pitch / Radian_Rate) ;
+	machinery_pid_Y.imu_speed_pid->err = machinery_pid_Y.imu_speed_pid->target - machinery_pid_Y.imu_speed_pid->measure;
+	
+	
+	//-----内环的计算----//
+	single_pid_ctrl ( machinery_pid_Y.imu_speed_pid, machinery_pid_Y.imu_speed_pid->err );
+
+
+//----------------------数组填充---------------------------//	
 	gimbal_txbuf[2] = (int16_t) machinery_pid_Y.imu_speed_pid->out>>8;
 	gimbal_txbuf[3] = (int16_t) machinery_pid_Y.imu_speed_pid->out;
 	
 
 		
 	
-	//Z轴
+//----------------------------Z轴-----------------------------//
+
+	//----外环测量值和误差-----//
 	gimbal_motor[GIMBAL_LOW].angle_pid_update(&gimbal_motor[GIMBAL_LOW]);
 	
 	
-	//yaw轴串级PID输出
+	//----外环的计算----//
 	single_pid_ctrl ( machinery_pid_Z.gimbal_angle_pid, machinery_pid_Z.gimbal_angle_pid->err );
-	single_pid_ctrl ( machinery_pid_Z.imu_speed_pid, \
-									  machinery_pid_Z.gimbal_angle_pid->out - ggz * cos( pitch / Radian_Rate) );	
+		
+		
+	//-----内环目标值----//
+	machinery_pid_Z.imu_speed_pid->target = machinery_pid_Z.gimbal_angle_pid->out;
+	
+	
+	//-----内环测量值和误差----//
+	machinery_pid_Z.imu_speed_pid->measure = ggz ;
+	machinery_pid_Z.imu_speed_pid->err = machinery_pid_Z.imu_speed_pid->target - machinery_pid_Z.imu_speed_pid->measure;
+	
+	
+	//----内环的计算-----//
+	single_pid_ctrl ( machinery_pid_Z.imu_speed_pid, machinery_pid_Z.imu_speed_pid->err );
+
+	
+	//-----填充数组-----//
 	gimbal_txbuf[0] = (int16_t) machinery_pid_Z.imu_speed_pid->out>>8;
 	gimbal_txbuf[1] = (int16_t) machinery_pid_Z.imu_speed_pid->out;
 	
@@ -397,3 +475,5 @@ void Cover_State_Judge(void)
 	else
 		Cover_Close();
 }
+
+

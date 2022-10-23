@@ -75,6 +75,11 @@ chassis\chassis_task.o: E:\Keil5\ARM\ARMCC\Bin\..\include\math.h
 chassis\chassis_task.o: ..\Application\DriverLayer\drv_io.h
 chassis\chassis_task.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\chassis_task.o: ..\Application\DeviceLayer\chassis\chassis.h
+chassis\chassis_task.o: ..\Application\DeviceLayer\vision_sensor\vision_sensor.h
+chassis\chassis_task.o: ..\Application\DriverLayer\drv_uart.h
+chassis\chassis_task.o: ..\Application\ProtocolLayer\vision_potocol.h
+chassis\chassis_task.o: ..\Application\AlgorithmLayer\crc.h
+chassis\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\chassis_task.o: ..\Application\DeviceLayer\Servo\Servo.h
 chassis\chassis_task.o: ../Core/Inc/tim.h
 chassis\chassis_task.o: ..\Application\TaskLayer\RC_Dial_Task.h

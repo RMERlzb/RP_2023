@@ -93,33 +93,37 @@ void ConstrainInt(int16_t* input, int16_t max, int16_t min)
 //不仅会让目标值和测量值的范围一致，并且还会对误差进行突变情况处理
 void MyRampFloat(float* target, float measure, float ramp, float* err)
 {
-	if(*target >= ramp)
-		*target -= ramp * 2;
-	else if(*target <= -ramp)
-		*target += ramp * 2;
+
+		if(*target >= ramp)
+			*target -= ramp * 2;
+		else if(*target <= -ramp)
+			*target += ramp * 2;
+
+		if(*target - measure >= ramp)
+			*err = *target - measure - ramp * 2;
+		else if(*target -measure <= -ramp)
+			*err = *target - measure + ramp * 2;
+		else
+			*err = *target - measure;
 	
-	if(*target - measure >= ramp)
-		*err = *target - measure - ramp * 2;
-	else if(*target -measure <= -ramp)
-		*err = *target - measure + ramp * 2;
-	else
-		*err = *target - measure;
 }
 
 //不仅会让目标值和测量值的范围一致，并且还会对误差进行突变情况处理
 void MyRampInt(int16_t* target, int16_t measure, int16_t ramp, int16_t* err)
 {
-	if(*target >= ramp)
-		*target -= ramp * 2;
-	else if(*target <= -ramp)
-		*target += ramp * 2;
+ 
+		if(*target >= ramp)
+			*target -= ramp * 2;
+		else if(*target <= -ramp)
+			*target += ramp * 2;
+
+		if(*target - measure >= ramp)
+			*err = *target - measure - ramp * 2;
+		else if(*target -measure <= -ramp)
+			*err = *target - measure + ramp * 2;
+		else
+			*err = *target - measure;
 	
-	if(*target - measure >= ramp)
-		*err = *target - measure - ramp * 2;
-	else if(*target -measure <= -ramp)
-		*err = *target - measure + ramp * 2;
-	else
-		*err = *target - measure;
 }
 //不需要改变目标值，只需要对误差进行突变情况处理
 void RampFloat(float target, float measure, float ramp, float* err)

@@ -74,5 +74,10 @@ chassis\gimbal.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
 chassis\gimbal.o: ..\Application\ConfigLayer\rp_config.h
 chassis\gimbal.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\gimbal.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\gimbal.o: ..\Application\DeviceLayer\vision_sensor\vision_sensor.h
+chassis\gimbal.o: ..\Application\DriverLayer\drv_uart.h
+chassis\gimbal.o: ..\Application\ProtocolLayer\vision_potocol.h
+chassis\gimbal.o: ..\Application\AlgorithmLayer\crc.h
+chassis\gimbal.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\gimbal.o: ..\Application\DeviceLayer\Servo\Servo.h
 chassis\gimbal.o: ../Core/Inc/tim.h

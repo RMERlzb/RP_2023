@@ -9,6 +9,7 @@
 #include "rp_math.h"
 #include "Imu_Task.h"
 #include "chassis.h"
+#include "vision_sensor.h"
 #include "rp_user_define.h"
 #include "rc_sensor.h"
 #include "Servo.h"
@@ -23,9 +24,12 @@ typedef struct machinery_pid_struct{
 	pid_ctrl_t*	 imu_speed_pid;
 } machinery_pid_t;
 
-
+extern machinery_pid_t  machinery_pid_Z;
 extern machinery_pid_t  machinery_pid_Y;
+
+extern imu_pid_t imu_pid_Y;
 extern imu_pid_t imu_pid_Z;
+
 extern float chassis_input;
 
 
@@ -52,5 +56,5 @@ void Gimbal_Send(void);
 
 char Mechanical_Return(void);
 
-
+	
 #endif

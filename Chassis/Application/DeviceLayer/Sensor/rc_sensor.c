@@ -33,7 +33,7 @@ void rc_sensor_start_check(rc_sensor_t *rc);
 /* Exported variables --------------------------------------------------------*/
 // Ò£¿ØÆ÷Çý¶¯
 drv_uart_t	rc_sensor_driver = {
-	.id = DRV_UART2,
+	.type = DRV_UART2,
 	.tx_byte = NULL,
 };
 
@@ -60,6 +60,8 @@ rc_sensor_dial_t rc_sensor_dial = {
 	.FricWheel_WorkEnable = 0,
 	
 	.Single_ShootEnable = 0,
+	
+	.Version_Control_Enable = 0,
 	
 	.Var_Change_Enable = 0,
 	
@@ -201,6 +203,8 @@ void rc_dial_reset(rc_sensor_t *rc)
 	
 	rc->dial->Single_ShootEnable = Flase;
 	
+	rc->dial->Version_Control_Enable = Flase;
+	
 	rc->dial->Var_Change_Enable = Flase;
 	
 	rc->dial->Continue_Shoot_BlockFlag = Flase;
@@ -249,6 +253,7 @@ void rc_dial_jugde(rc_sensor_t *rc)
 				rc->dial->Var_Change_Enable = !rc->dial->Var_Change_Enable;
 		}	
 		
+
 		//ÅÐ¶ÏÊÇ·ñ¿ª¸Ç
 		if( rc->dial->This_RightDial_Mode == cover_state_trans )
 		{
@@ -281,6 +286,15 @@ void rc_dial_jugde(rc_sensor_t *rc)
 				rc->dial->Continue_ShootEnable = !rc->dial->Continue_ShootEnable;
 				
 		}	
+		
+		//ÅÐ¶ÏÊÇ·ñÒª¿ªÆôÊÓ¾õ¿ØÖÆ
+		if( rc->dial->This_RightDial_Mode == version_control_mode )
+		{
+			if( rc->dial->This_RightDial_Mode != rc->dial->Last_RightDial_Mode ) 		
+				rc->dial->Version_Control_Enable = !rc->dial->Version_Control_Enable;
+		
+		}
+
 		
 		//ÅÐ¶ÏÊÇ·ñ¿ªÆôÄ¦²ÁÂÖ
 		if( rc->dial->This_RightDial_Mode == fricwheel_state_trans )

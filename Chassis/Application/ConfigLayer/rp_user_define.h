@@ -36,12 +36,14 @@
 
 //拨码位置对应的模式值(从上往下 1---3---2)
 					//左
+#define keyboard_mode		1
 #define imu_mode 				3
 #define mec_mode 				2
-#define keyboard_mode		1
+
 
 	//陀螺仪模式下的右拨码
 #define continue_shot_mode			1
+#define version_control_mode    3
 #define fricwheel_state_trans		2	
 
 	//机械模式下的右拨码

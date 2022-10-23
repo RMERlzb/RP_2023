@@ -55,6 +55,7 @@ osThreadId RC_HeartTaskHandle;
 osThreadId RC_DialTaskHandle;
 osThreadId Shoot_TaskHandle;
 osThreadId Gimbal_TaskHandle;
+osThreadId Vision_TaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -69,6 +70,7 @@ void StartRC_HeartTask(void const * argument);
 void StartRC_DialTask(void const * argument);
 void StartShoot_Task(void const * argument);
 void StartGimbal_Task(void const * argument);
+void StartVision_Task(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -146,6 +148,10 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of Gimbal_Task */
   osThreadDef(Gimbal_Task, StartGimbal_Task, osPriorityNormal, 0, 128);
   Gimbal_TaskHandle = osThreadCreate(osThread(Gimbal_Task), NULL);
+
+  /* definition and creation of Vision_Task */
+  osThreadDef(Vision_Task, StartVision_Task, osPriorityNormal, 0, 128);
+  Vision_TaskHandle = osThreadCreate(osThread(Vision_Task), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -295,6 +301,24 @@ __weak void StartGimbal_Task(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartGimbal_Task */
+}
+
+/* USER CODE BEGIN Header_StartVision_Task */
+/**
+* @brief Function implementing the Vision_Task thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartVision_Task */
+__weak void StartVision_Task(void const * argument)
+{
+  /* USER CODE BEGIN StartVision_Task */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartVision_Task */
 }
 
 /* Private application code --------------------------------------------------*/

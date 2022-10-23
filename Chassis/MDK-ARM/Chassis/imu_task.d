@@ -75,5 +75,10 @@ chassis\imu_task.o: ..\Application\ConfigLayer\rp_config.h
 chassis\imu_task.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\imu_task.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\imu_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\imu_task.o: ..\Application\DeviceLayer\vision_sensor\vision_sensor.h
+chassis\imu_task.o: ..\Application\DriverLayer\drv_uart.h
+chassis\imu_task.o: ..\Application\ProtocolLayer\vision_potocol.h
+chassis\imu_task.o: ..\Application\AlgorithmLayer\crc.h
+chassis\imu_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\imu_task.o: ..\Application\DeviceLayer\Servo\Servo.h
 chassis\imu_task.o: ../Core/Inc/tim.h

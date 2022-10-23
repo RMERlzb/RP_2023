@@ -126,6 +126,8 @@ typedef struct rc_sensor_dial_struct {
 	char  FricWheel_WorkEnable;
 	char 	Single_ShootEnable;
 	
+	char  Version_Control_Enable; 
+	
 	char	Var_Change_Enable;
 	
 	char  Continue_Shoot_BlockFlag;

@@ -76,6 +76,11 @@ chassis\gimbal_task.o: E:\Keil5\ARM\ARMCC\Bin\..\include\math.h
 chassis\gimbal_task.o: ..\Application\DriverLayer\drv_io.h
 chassis\gimbal_task.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\gimbal_task.o: ..\Application\DeviceLayer\chassis\chassis.h
+chassis\gimbal_task.o: ..\Application\DeviceLayer\vision_sensor\vision_sensor.h
+chassis\gimbal_task.o: ..\Application\DriverLayer\drv_uart.h
+chassis\gimbal_task.o: ..\Application\ProtocolLayer\vision_potocol.h
+chassis\gimbal_task.o: ..\Application\AlgorithmLayer\crc.h
+chassis\gimbal_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\gimbal_task.o: ..\Application\DeviceLayer\Servo\Servo.h
 chassis\gimbal_task.o: ../Core/Inc/tim.h
 chassis\gimbal_task.o: ..\Application\TaskLayer\RC_Heart_Task.h
