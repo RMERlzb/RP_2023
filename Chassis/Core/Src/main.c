@@ -98,6 +98,7 @@ int main(void)
   MX_CAN2_Init();
   MX_TIM1_Init();
   MX_USART3_UART_Init();
+  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
 	
 	//-----------遥控器------------//
@@ -107,6 +108,10 @@ int main(void)
 	//-----------视觉------------//
 	HAL_UART_MspInit(&huart3);
 	USART3_Init();
+	
+	//----------裁判系统------------//
+	HAL_UART_MspInit(&huart5);
+	USART5_Init();
 	
 	//----------CAN1和CAN2-------------//
 	CAN_Init();

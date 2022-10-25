@@ -36,8 +36,8 @@ typedef enum {
 	LEN_VISION_RX_PACKET	= 16,	// 接收包整包长度
 	LEN_VISION_TX_PACKET	= 15,	// 发送包整包长度
 
-	LEN_RX_DATA 			    = LEN_VISION_RX_PACKET - 5,	// 接收数据段长度
-	LEN_TX_DATA 			    = LEN_VISION_TX_PACKET - 5,	// 发送数据段长度
+	LEN_RX_DATA 			    = LEN_VISION_RX_PACKET - 5,	// 接收数据段长度  12
+	LEN_TX_DATA 			    = LEN_VISION_TX_PACKET - 5,	// 发送数据段长度  10
 	
 	LEN_FRAME_HEADER 	  	= 3,	// 帧头长度
 	LEN_FRAME_TAILER 		  = 2,	// 帧尾CRC16
@@ -52,8 +52,8 @@ typedef enum {
 	sof			  = 0,
 	Cmd_ID		= 1,
 	Crc8		  = 2,
-	Data		  = LEN_FRAME_HEADER,
-	TX_CRC16	= LEN_FRAME_HEADER + LEN_TX_DATA,
+	Data		  = LEN_FRAME_HEADER,  // 3开始
+	TX_CRC16	= LEN_FRAME_HEADER + LEN_TX_DATA,  //  13~14
 } Vision_Frame_Header_Offset_t;
 
 /* 帧头格式 */
@@ -115,9 +115,9 @@ typedef __packed struct
 /* 发送包格式 */
 typedef __packed struct
 {
-	Vision_Frame_Header_t FrameHeader;	// 帧头
-	Vision_Tx_Data_t	    TxData;		    // 数据
-	Vision_Frame_Tailer_t FrameTailer;	// 帧尾		
+	Vision_Frame_Header_t FrameHeader;	// 帧头  3
+	Vision_Tx_Data_t	    TxData;		    // 数据  10
+	Vision_Frame_Tailer_t FrameTailer;	// 帧尾	 2	 
 } Vision_Tx_Packet_t;
 
 

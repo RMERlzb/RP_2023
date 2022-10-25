@@ -8,18 +8,23 @@
 //6020给正的输入值会逆时针转，给负的输入值会顺时针转
 
 
+//主控板位置，1---上，0---下
+#define Dashboard_Low       0
+#define Dashboard_Above			1
+#define Dashboard_Position  Dashboard_Above
+
 //底盘最大速度和初始速度增加比例
-#define Chassis_VMax  		8000
-#define V_Rate					Chassis_VMax/660
+#define Chassis_OutMax  		8000
+#define V_Rate					Chassis_OutMax/660
 
 //云台的pitch极限值
 #define gimbal_pitchmax  22.5f
 #define gimbal_pitchmin  -38.5f
 
 //底盘正方向的Z轴和Y轴的机械中值
-#define mechanical_Z  				2050
-#define mechanical_Y  				6800
-#define tail_mechanical				6050
+#define mechanical_Z  			4800	//2050
+#define mechanical_Y  			6800
+#define tail_mechanical				0     //6050
 
 
 //RM电机最大角度

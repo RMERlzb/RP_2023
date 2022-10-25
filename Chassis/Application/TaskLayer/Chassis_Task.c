@@ -15,9 +15,9 @@ void StartChassis_Task(void const * argument)
 		if( rc_sensor.work_state == DEV_ONLINE )	
 		{
 			
-				Chassis_MEC_Input();	
-							
-				Chassis_send();							
+//				Chassis_MEC_Input();	
+//							
+//				Chassis_send();							
 
 			
 		}

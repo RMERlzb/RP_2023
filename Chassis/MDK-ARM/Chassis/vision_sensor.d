@@ -74,12 +74,17 @@ chassis\vision_sensor.o: ..\Application\DriverLayer\drv_can.h
 chassis\vision_sensor.o: ../Core/Inc/can.h
 chassis\vision_sensor.o: ..\Application\DeviceLayer\chassis_motor\chassis_motor.h
 chassis\vision_sensor.o: ..\Application\DeviceLayer\shoot_motor\shoot_motor.h
+chassis\vision_sensor.o: ..\Application\DeviceLayer\slave\slave.h
+chassis\vision_sensor.o: ..\Application\DeviceLayer\judge_sensor\judge_sensor.h
+chassis\vision_sensor.o: ..\Application\ProtocolLayer\judge_potocol.h
+chassis\vision_sensor.o: ..\Application\DeviceLayer\judge_sensor\judge_sensor.h
 chassis\vision_sensor.o: ..\Application\TaskLayer\Imu_Task.h
 chassis\vision_sensor.o: ..\Application\DeviceLayer\chassis\chassis.h
 chassis\vision_sensor.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
 chassis\vision_sensor.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\vision_sensor.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\vision_sensor.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\vision_sensor.o: ..\Application\AlgorithmLayer\power_limit.h
 chassis\vision_sensor.o: ..\Application\DeviceLayer\vision_sensor\vision_sensor.h
 chassis\vision_sensor.o: ..\Application\DeviceLayer\Servo\Servo.h
 chassis\vision_sensor.o: ../Core/Inc/tim.h

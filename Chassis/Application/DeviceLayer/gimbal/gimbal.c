@@ -188,9 +188,8 @@ void imu_pid_init(void)
 
 void imu_pid_cal(void)
 {
-	pid_ctrl_t* angle_pid_temp;
-	pid_ctrl_t* speed_pid_temp;
-	
+
+
 	
 //---------------------------目标值的更改地方-------------------------//	
 	//如果开启视觉控制
@@ -217,29 +216,26 @@ void imu_pid_cal(void)
 	
 	
 //--------------------------------------Z轴的--------------------------------//
-	angle_pid_temp = imu_pid_Z.imu_angle_pid;
-	speed_pid_temp = imu_pid_Z.imu_speed_pid;
-	
+
 
 //----------------------------------计算------------------------------//
 	
 //-------------外环	
-	angle_pid_temp->measure = yaw;
+	imu_pid_Z.imu_angle_pid->measure = yaw;
 	MyRampFloat (&imu_pid_Z.imu_angle_pid->target, yaw, 180, &imu_pid_Z.imu_angle_pid->err);
-	angle_pid_temp->err = imu_pid_Z.imu_angle_pid->err;
-	single_pid_ctrl ( angle_pid_temp, angle_pid_temp->err );
+	single_pid_ctrl ( imu_pid_Z.imu_angle_pid, imu_pid_Z.imu_angle_pid->err );
 	
 	
 //-------------内环	
-	speed_pid_temp->target =  angle_pid_temp->out;
-	speed_pid_temp->measure = ggz;
-	speed_pid_temp->err = speed_pid_temp->target - speed_pid_temp->measure;
-	single_pid_ctrl ( speed_pid_temp, speed_pid_temp->err );
+	imu_pid_Z.imu_speed_pid->target =  imu_pid_Z.imu_angle_pid->out;
+	imu_pid_Z.imu_speed_pid->measure = ggz;
+	imu_pid_Z.imu_speed_pid->err = imu_pid_Z.imu_speed_pid->target - imu_pid_Z.imu_speed_pid->measure;
+	single_pid_ctrl ( imu_pid_Z.imu_speed_pid, imu_pid_Z.imu_speed_pid->err );
 	
 	
 //-------------------------------填充数组--------------------------//	
-	gimbal_txbuf[0] = (int16_t) speed_pid_temp->out>>8;
-	gimbal_txbuf[1] = (int16_t) speed_pid_temp->out;
+	gimbal_txbuf[0] = (int16_t) imu_pid_Z.imu_speed_pid->out>>8;
+	gimbal_txbuf[1] = (int16_t) imu_pid_Z.imu_speed_pid->out;
 	
 	
 	
@@ -247,28 +243,27 @@ void imu_pid_cal(void)
 	
 	
 //--------------------------------------Y轴的--------------------------------//	
-	angle_pid_temp = imu_pid_Y.imu_angle_pid;
-	speed_pid_temp = imu_pid_Y.imu_speed_pid;
+
 
 
 //----------------------------------计算------------------------------//
 //-------------外环	
 	ConstrainFloat( &imu_pid_Y.imu_angle_pid->target, gimbal_pitchmax, gimbal_pitchmin);
-	angle_pid_temp->measure = pitch;
-	angle_pid_temp->err = angle_pid_temp->target - angle_pid_temp->measure;
-	single_pid_ctrl ( angle_pid_temp, angle_pid_temp->err );
+	imu_pid_Y.imu_angle_pid->measure = pitch;
+	imu_pid_Y.imu_angle_pid->err = imu_pid_Y.imu_angle_pid->target - imu_pid_Y.imu_angle_pid->measure;
+	single_pid_ctrl ( imu_pid_Y.imu_angle_pid, imu_pid_Y.imu_angle_pid->err );
 
 
 //-------------内环	
-	speed_pid_temp->target =  angle_pid_temp->out;
-	speed_pid_temp->measure = ggy;
-	speed_pid_temp->err = speed_pid_temp->target - ggy ;
-	single_pid_ctrl ( speed_pid_temp, speed_pid_temp->err );
+	imu_pid_Y.imu_speed_pid->target =  imu_pid_Y.imu_angle_pid->out;
+	imu_pid_Y.imu_speed_pid->measure = ggy;
+	imu_pid_Y.imu_speed_pid->err = imu_pid_Y.imu_speed_pid->target - ggy ;
+	single_pid_ctrl ( imu_pid_Y.imu_speed_pid, imu_pid_Y.imu_speed_pid->err );
 	
 
 //-------------------------------填充数组--------------------------//		
-	gimbal_txbuf[2] = (int16_t) speed_pid_temp->out>>8;
-	gimbal_txbuf[3] = (int16_t) speed_pid_temp->out;
+	gimbal_txbuf[2] = (int16_t) imu_pid_Y.imu_speed_pid->out>>8;
+	gimbal_txbuf[3] = (int16_t) imu_pid_Y.imu_speed_pid->out;
 	
 
 }
@@ -300,8 +295,7 @@ void Chassis_Input(void)
 	if( rc_sensor_dial.Imu_Mode == True )
 	{
 		//说明取消了小陀螺
-		if( rc_sensor_dial.Last_Gryo_Mode != rc_sensor_dial.This_Gryo_Mode && \
-				rc_sensor_dial.Last_Gryo_Mode == True )
+		if( rc_sensor_dial.Gryo_Mode == Flase )
 		{
 			//跟头
 			if( gimbal_motor[GIMBAL_LOW].info->angle > 0 && gimbal_motor[GIMBAL_LOW].info->angle <= 4050 )

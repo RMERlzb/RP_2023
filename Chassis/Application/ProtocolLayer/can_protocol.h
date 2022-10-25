@@ -6,6 +6,8 @@
 #include "chassis_motor.h"
 #include "gimbal_motor.h"
 #include "shoot_motor.h"
+#include "slave.h"
+#include "rp_user_define.h"
 /*
 	主要负责对各个电机反馈回来的信息进行存储
 	CAN1接收到信息后进入drv_can.h中的HAL_CAN_RxFifo0MsgPendingCallback函数

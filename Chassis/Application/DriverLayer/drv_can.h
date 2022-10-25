@@ -38,5 +38,6 @@ extern int8_t shoot_txbuf[8];
 void CAN_Init(void);
 static void CAN_Filter_Init(CAN_FilterTypeDef *sFilterConfig);
 void CAN_Send_Msg(CANTxMsg_t *msg,uint16_t mailbox_id,int8_t *sendbuff);
+uint8_t HXZP_Tx_uint8(uint32_t std, uint8_t *data,char can,uint32_t DL);
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan);
 #endif

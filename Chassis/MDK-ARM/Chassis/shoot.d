@@ -62,3 +62,9 @@ chassis\shoot.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups
 chassis\shoot.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
 chassis\shoot.o: ..\Application\ConfigLayer\rp_config.h
 chassis\shoot.o: ..\Application\AlgorithmLayer\pid.h
+chassis\shoot.o: ..\Application\AlgorithmLayer\power_limit.h
+chassis\shoot.o: ..\Application\ProtocolLayer\judge_potocol.h
+chassis\shoot.o: ..\Application\DeviceLayer\judge_sensor\judge_sensor.h
+chassis\shoot.o: ..\Application\ProtocolLayer\judge_potocol.h
+chassis\shoot.o: ..\Application\AlgorithmLayer\crc.h
+chassis\shoot.o: ..\Application\DriverLayer\drv_uart.h

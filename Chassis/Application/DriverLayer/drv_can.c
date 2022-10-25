@@ -70,6 +70,35 @@ void CAN_Send_Msg(CANTxMsg_t *msg, uint16_t mailbox_id, int8_t *sendbuff)
 		HAL_CAN_AddTxMessage(&hcan2, &(msg->TxMessage), msg->data, 0);
 	
 }
+
+
+
+uint8_t HXZP_Tx_uint8(uint32_t std, uint8_t *data,char can,uint32_t DL)
+{
+	uint8_t i;
+	CANTxMsg_t TxMes;
+	uint32_t CAN_Tx_Mailbox;
+	
+	TxMes.TxMessage.IDE = CAN_ID_STD;
+	TxMes.TxMessage.RTR = CAN_RTR_DATA;
+	TxMes.TxMessage.DLC = DL;    //------------个数
+	TxMes.TxMessage.StdId = std; 	  //ID号
+	
+	TxMes.data[0] = data[0];
+	TxMes.data[1] = data[1];	
+	TxMes.data[2] = data[2];	
+	TxMes.data[3] = data[3];
+
+	TxMes.data[4] = data[4];
+	TxMes.data[5] = data[5];	
+	TxMes.data[6] = data[6];	
+	TxMes.data[7] = data[7];
+	
+	if(can == 1)i = HAL_CAN_AddTxMessage(&hcan1,&TxMes.TxMessage,TxMes.data,  &CAN_Tx_Mailbox);
+	if(can == 2)i = HAL_CAN_AddTxMessage(&hcan2,&TxMes.TxMessage,TxMes.data,  &CAN_Tx_Mailbox);
+	return i;
+}
+
 //在can_protocol.c文件中
 __WEAK void CAN1_rxDataHandler(uint32_t rxId, uint8_t*rxBuf)
 {

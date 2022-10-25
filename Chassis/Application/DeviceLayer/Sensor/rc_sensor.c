@@ -53,8 +53,10 @@ rc_sensor_dial_t rc_sensor_dial = {
 	
 	.Mechanical_Mode = 0,
 	.Imu_Mode = 0,
-	.This_Gryo_Mode = 0,
-	.Last_Gryo_Mode = 0,
+	.Gryo_Mode = 0,
+
+	.ThumbWheel_Up_Toggle = 0,
+	.ThumbWheel_Down_Toggle = 0,
 	
 	.Continue_ShootEnable = 0,
 	.FricWheel_WorkEnable = 0,
@@ -186,7 +188,8 @@ void RC_ResetData(rc_sensor_t *rc)
 
 void rc_dial_reset(rc_sensor_t *rc)
 {
-//	memset( &rc_sensor_dial, 0, sizeof(rc_sensor_dial) );
+//	memset( &rc_sensor_dial, Flase, sizeof(rc_sensor_dial) );
+	
 	rc->dial->This_LeftDial_Mode = Flase;
 	rc->dial->Last_LeftDial_Mode = Flase;
 	
@@ -195,8 +198,10 @@ void rc_dial_reset(rc_sensor_t *rc)
 	
 	rc->dial->Mechanical_Mode = Flase;
 	rc->dial->Imu_Mode = Flase;
-	rc->dial->This_Gryo_Mode = Flase;
-	rc->dial->Last_Gryo_Mode = Flase;
+	rc->dial->Gryo_Mode = Flase;
+
+	rc->dial->ThumbWheel_Up_Toggle = Flase;
+	rc->dial->ThumbWheel_Down_Toggle = Flase;
 	
 	rc->dial->Continue_ShootEnable = Flase;
 	rc->dial->FricWheel_WorkEnable = Flase;
@@ -227,10 +232,16 @@ void rc_dial_jugde(rc_sensor_t *rc)
 	
 	rc->dial->Last_LeftDial_Mode = rc->dial->This_LeftDial_Mode;
 	rc->dial->Last_RightDial_Mode = rc->dial->This_RightDial_Mode;	
-	rc->dial->Last_Gryo_Mode = rc->dial->This_Gryo_Mode;
+
 	
 	rc->dial->This_LeftDial_Mode = rc->info->s1;
 	rc->dial->This_RightDial_Mode = rc->info->s2;
+	
+	//判断滚轮状态
+	if( rc->info->thumbwheel >= 330 )	
+		rc->dial->ThumbWheel_Down_Toggle = !rc->dial->ThumbWheel_Down_Toggle;
+	else if( rc->info->thumbwheel <= -330 )	
+		rc->dial->ThumbWheel_Up_Toggle = !rc->dial->ThumbWheel_Up_Toggle;
 	
 	
 	
@@ -240,7 +251,7 @@ void rc_dial_jugde(rc_sensor_t *rc)
 		rc->dial->Mechanical_Mode = True;
 		
 		rc->dial->Imu_Mode = Flase;
-		rc->dial->This_Gryo_Mode = Flase;
+		rc->dial->Gryo_Mode = Flase;
 		
 		rc->dial->Continue_ShootEnable = Flase;
 		rc->dial->FricWheel_WorkEnable = True;	
@@ -273,12 +284,13 @@ void rc_dial_jugde(rc_sensor_t *rc)
 		rc->dial->Single_ShootEnable = Flase;
 		
 		//左拨码在小陀螺模式
-		if( rc->info->thumbwheel >= 330 )	
-			rc->dial->This_Gryo_Mode = True;
+		if( rc->dial->ThumbWheel_Down_Toggle == True )	
+			rc->dial->Gryo_Mode = True;
 		else
-			rc->dial->This_Gryo_Mode = Flase;
+			rc->dial->Gryo_Mode = Flase;
 		
-			
+		
+		
 		//判断是否连续发射
 		if( rc->dial->This_RightDial_Mode == continue_shot_mode )
 		{
@@ -287,12 +299,13 @@ void rc_dial_jugde(rc_sensor_t *rc)
 				
 		}	
 		
-		//判断是否要开启视觉控制
+		//判断是否要开启视觉控制，有两个条件-----一个左滚轮跳变往上开启，一个陀螺仪模式下拨杆在中间
 		if( rc->dial->This_RightDial_Mode == version_control_mode )
 		{
-			if( rc->dial->This_RightDial_Mode != rc->dial->Last_RightDial_Mode ) 		
-				rc->dial->Version_Control_Enable = !rc->dial->Version_Control_Enable;
-		
+			if( rc->dial->ThumbWheel_Up_Toggle == True )
+				rc->dial->Version_Control_Enable = True;
+			else
+				rc->dial->Version_Control_Enable = Flase;
 		}
 
 		
@@ -315,7 +328,7 @@ void rc_dial_jugde(rc_sensor_t *rc)
 	{
 		rc->dial->Mechanical_Mode = Flase;
 		rc->dial->Imu_Mode = Flase;
-		rc->dial->This_Gryo_Mode = Flase;
+		rc->dial->Gryo_Mode = Flase;
 	}
 	
 	

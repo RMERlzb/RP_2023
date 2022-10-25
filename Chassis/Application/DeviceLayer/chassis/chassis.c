@@ -13,9 +13,13 @@ void Chassis_Init(void)
 	}
 }
 
+	
+
 void Chassis_MEC_Input(void)
 {
 	float speed[4] = {0};	
+	int16_t speed_limit[4] = {0};
+	
 	float speed_x = 0, speed_y = 0, speed_z = 0;
 	float angle_err = 0, speed_xx = 0, speed_yy = 0;
 	
@@ -46,7 +50,7 @@ void Chassis_MEC_Input(void)
 	{
 		
 		//如果是小陀螺模式
-		if( rc_sensor.dial->This_Gryo_Mode == True )		
+		if( rc_sensor.dial->Gryo_Mode == True )		
 		{		
 			angle_err = ( gimbal_motor[GIMBAL_LOW].info->angle - mechanical_Z ) / Mec_To_Angle_Rate ;
 			
@@ -75,30 +79,36 @@ void Chassis_MEC_Input(void)
 	}
 	
 	
-	
 	speed[0] = (speed_x + speed_y + speed_z) * V_Rate;
 	speed[1] = (- speed_x + speed_y + speed_z) * V_Rate;
 	speed[2] = (speed_x - speed_y + speed_z) * V_Rate;
 	speed[3] = (- speed_x - speed_y + speed_z) * V_Rate;
-	
+
 	//速度大于最大限幅，等比例缩小
 	for ( int i = 0; i < 4; i ++ )
 	{
-		if ( MyAbs_Float (speed[i]) > Chassis_VMax )
+		if ( MyAbs_Float (speed[i]) > Chassis_OutMax )
 		{
 			if( speed[i] <= 0 )
-				speed[i] *= - Chassis_VMax / speed[i];
+				speed[i] *= - Chassis_OutMax / speed[i];
 			
 			else
-				speed[i] *=  Chassis_VMax / speed[i];
+				speed[i] *=  Chassis_OutMax / speed[i];
 			
 		}												
 	}
 	
-	(chassis_motor[CHAS_LF].speed_pid)->target = speed[0];
-	(chassis_motor[CHAS_RF].speed_pid)->target = speed[1];
-	(chassis_motor[CHAS_LB].speed_pid)->target = speed[2];
-	(chassis_motor[CHAS_RB].speed_pid)->target = speed[3];
+	//----------------------送入功率限制------------------//
+	for( int i = 0; i < 4; i ++ )
+		speed_limit[i] = (int16_t)speed[i];
+	
+	Chassis_Motor_Power_Limit( (int16_t*) speed_limit );
+	
+	
+	(chassis_motor[CHAS_LF].speed_pid)->target = speed_limit[0];
+	(chassis_motor[CHAS_RF].speed_pid)->target = speed_limit[1];
+	(chassis_motor[CHAS_LB].speed_pid)->target = speed_limit[2];
+	(chassis_motor[CHAS_RB].speed_pid)->target = speed_limit[3];
 
 }
 

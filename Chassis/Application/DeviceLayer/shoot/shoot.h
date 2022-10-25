@@ -9,7 +9,7 @@
 #include "RC_Dial_Task.h"
 #include "rp_math.h"
 #include "pid.h"
-
+#include "power_limit.h"
 void Shoot_Init(void);
 void FricWheel_WorkState_Switch(void);
 void Block_Manage(void);

@@ -56,6 +56,7 @@ osThreadId RC_DialTaskHandle;
 osThreadId Shoot_TaskHandle;
 osThreadId Gimbal_TaskHandle;
 osThreadId Vision_TaskHandle;
+osThreadId Judge_TaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -71,6 +72,7 @@ void StartRC_DialTask(void const * argument);
 void StartShoot_Task(void const * argument);
 void StartGimbal_Task(void const * argument);
 void StartVision_Task(void const * argument);
+void StartJudge_Task(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -152,6 +154,10 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of Vision_Task */
   osThreadDef(Vision_Task, StartVision_Task, osPriorityNormal, 0, 128);
   Vision_TaskHandle = osThreadCreate(osThread(Vision_Task), NULL);
+
+  /* definition and creation of Judge_Task */
+  osThreadDef(Judge_Task, StartJudge_Task, osPriorityNormal, 0, 128);
+  Judge_TaskHandle = osThreadCreate(osThread(Judge_Task), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -319,6 +325,24 @@ __weak void StartVision_Task(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartVision_Task */
+}
+
+/* USER CODE BEGIN Header_StartJudge_Task */
+/**
+* @brief Function implementing the Judge_Task thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartJudge_Task */
+__weak void StartJudge_Task(void const * argument)
+{
+  /* USER CODE BEGIN StartJudge_Task */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartJudge_Task */
 }
 
 /* Private application code --------------------------------------------------*/

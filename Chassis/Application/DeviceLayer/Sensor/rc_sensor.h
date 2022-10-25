@@ -119,8 +119,10 @@ typedef struct rc_sensor_dial_struct {
 	
 	char  Mechanical_Mode;
 	char  Imu_Mode;
-	char	This_Gryo_Mode;
-	char  Last_Gryo_Mode;
+	char	Gryo_Mode;
+
+	char  ThumbWheel_Up_Toggle;
+	char  ThumbWheel_Down_Toggle;
 	
 	char  Continue_ShootEnable;
 	char  FricWheel_WorkEnable;

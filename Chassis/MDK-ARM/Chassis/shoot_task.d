@@ -64,3 +64,9 @@ chassis\shoot_task.o: ..\Application\DriverLayer\drv_can.h
 chassis\shoot_task.o: ../Core/Inc/can.h
 chassis\shoot_task.o: ../Core/Inc/main.h
 chassis\shoot_task.o: ..\Application\AlgorithmLayer\pid.h
+chassis\shoot_task.o: ..\Application\AlgorithmLayer\power_limit.h
+chassis\shoot_task.o: ..\Application\ProtocolLayer\judge_potocol.h
+chassis\shoot_task.o: ..\Application\DeviceLayer\judge_sensor\judge_sensor.h
+chassis\shoot_task.o: ..\Application\ProtocolLayer\judge_potocol.h
+chassis\shoot_task.o: ..\Application\AlgorithmLayer\crc.h
+chassis\shoot_task.o: ..\Application\DriverLayer\drv_uart.h

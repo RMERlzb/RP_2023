@@ -30,9 +30,11 @@ void Shoot_Init(void)
 }
 
 
+
+
 void FricWheel_WorkState_Switch(void)
 {
-	
+
 	if( rc_sensor_dial.FricWheel_WorkEnable == Flase ) 
 	{	
 		//减速
@@ -94,7 +96,7 @@ void Block_Manage(void)
 					//关闭速度PID
 					dial->Continue_Shoot_BlockFlag = True;			
 				
-					shoot_motor[SHOOT_DIAL].anglesum_pid->target += 35000;			
+					shoot_motor[SHOOT_DIAL].anglesum_pid->target += 40000;			
 					
 					shoot_motor[SHOOT_DIAL].anglesum_pid_update(&shoot_motor[SHOOT_DIAL]);
 				}			
@@ -114,7 +116,7 @@ void Block_Manage(void)
 			//--------------------------完成粗略的堵转工作(误差放大)--------------------------//
 			temp_err = shoot_motor[SHOOT_DIAL].anglesum_pid->err ;
 			
-			if( dial->Continue_Shoot_BlockFlag == True && MyAbs_Float(temp_err) <= 2000 )	
+			if( dial->Continue_Shoot_BlockFlag == True && MyAbs_Float(temp_err) <= 4000 )	
 			{
 				dial->Continue_Shoot_BlockFlag = Flase;
 				dial->ContinueShoot_Block_ToggleDir = 0;
@@ -124,7 +126,7 @@ void Block_Manage(void)
 			
 			
 			//-------------------------堵转工作出现问题(更容易出去)--------------------------//
-			if( dial->Continue_Shoot_BlockFlag == True && MyAbs_Float(temp_err) > 2000 )
+			if( dial->Continue_Shoot_BlockFlag == True && MyAbs_Float(temp_err) > 4000 )
 			{
 				Toggle_Block_Cnt1 ++;
 				
@@ -136,9 +138,9 @@ void Block_Manage(void)
 					dial->ContinueShoot_Block_ToggleDir = !dial->ContinueShoot_Block_ToggleDir;
 				
 					if( !dial->ContinueShoot_Block_ToggleDir )
-						shoot_motor[SHOOT_DIAL].anglesum_pid->target += 35000;			
+						shoot_motor[SHOOT_DIAL].anglesum_pid->target += 40000;			
 					else
-						shoot_motor[SHOOT_DIAL].anglesum_pid->target -= 35000;
+						shoot_motor[SHOOT_DIAL].anglesum_pid->target -= 40000;
 				}
 				
 			}
@@ -245,6 +247,8 @@ void Block_Manage(void)
 	
 }
 
+char flag = 0;
+
 
 void Shoot(void)
 {
@@ -253,26 +257,43 @@ void Shoot(void)
 	
 	FricWheel_WorkState_Switch();
 	
-	//单发
-	if( dial->Single_ShootEnable == True && dial->Single_Shoot_BlockFlag == Flase )
-	{		
+	flag = Shoot_Power_Judge();
+	
+	//不超功率的情况下才更新PID的数据
+	if( Shoot_Power_Judge() == 1 )
+	{
+			//单发
+		if( dial->Single_ShootEnable == True && dial->Single_Shoot_BlockFlag == Flase )
+		{		
+					
+			if( dial->Var_Change_Enable == True )
+			{	
+				//这里的target说的是转子的目标值
+				shoot_motor[SHOOT_DIAL].anglesum_pid->target += -45 * 820;
 				
-		if( dial->Var_Change_Enable == True )
-		{	
-			//这里的target说的是转子的目标值
-			shoot_motor[SHOOT_DIAL].anglesum_pid->target += -45 * 820;
+				dial->Var_Change_Enable = Flase;
+			}
 			
-			dial->Var_Change_Enable = Flase;
+			shoot_motor[SHOOT_DIAL].anglesum_pid_update(&shoot_motor[SHOOT_DIAL]);
+			
 		}
 		
-		shoot_motor[SHOOT_DIAL].anglesum_pid_update(&shoot_motor[SHOOT_DIAL]);
-		
+		//连续发
+		if( dial->Continue_ShootEnable == True && dial->Continue_Shoot_BlockFlag == Flase )
+		{
+			shoot_motor[SHOOT_DIAL].speed_pid->target = -Shoot_Vmax;
+			shoot_motor[SHOOT_DIAL].speed_pid_update(&shoot_motor[SHOOT_DIAL]);
+			
+		}
+			
 	}
 	
-	//连续发
-	if( dial->Continue_ShootEnable == True && dial->Continue_Shoot_BlockFlag == Flase )
-		shoot_motor[SHOOT_DIAL].speed_pid_update(&shoot_motor[SHOOT_DIAL]);
-			
+	//如果超功率，速度PID的目标值为0，角度PID由于目标值不变所以不用改动
+	else
+	{
+		shoot_motor[SHOOT_DIAL].speed_pid->target = 0;
+	}
+	
 }	
 
 

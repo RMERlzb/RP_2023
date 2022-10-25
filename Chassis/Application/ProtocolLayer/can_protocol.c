@@ -45,23 +45,27 @@ void CAN1_rxDataHandler(uint32_t rxId, uint8_t *rxBuf)
 
 void CAN2_rxDataHandler(uint32_t rxId, uint8_t *rxBuf)
 {	
-	if(rxId == Shoot_FricWheel_L)
+	
+	if( Dashboard_Position == Dashboard_Above )
+		Up_RX(rxId, rxBuf);	
+	
+	if(rxId == Shoot_FricWheel_L)//201
 	{
 		shoot_motor[SHOOT_LRUB].info_update(&shoot_motor[SHOOT_LRUB], rxBuf);
 		shoot_motor[SHOOT_LRUB].check(&shoot_motor[SHOOT_LRUB]);
 	}
 	
-	else if(rxId == Shoot_FricWheel_R)
+	else if(rxId == Shoot_FricWheel_R)//202
 	{
 		shoot_motor[SHOOT_RRUB].info_update(&shoot_motor[SHOOT_RRUB], rxBuf);
 		shoot_motor[SHOOT_RRUB].check(&shoot_motor[SHOOT_RRUB]);
 	}	
-	else if(rxId == Shoot_DialMotor)
+	else if(rxId == Shoot_DialMotor)//203
 	{
 		shoot_motor[SHOOT_DIAL].info_update(&shoot_motor[SHOOT_DIAL], rxBuf);
 		shoot_motor[SHOOT_DIAL].check(&shoot_motor[SHOOT_DIAL]);
 	}	
-	else if(rxId == Shoot_GunMotor)
+	else if(rxId == Shoot_GunMotor)//204
 	{
 		shoot_motor[SHOOT_GUN].info_update(&shoot_motor[SHOOT_GUN], rxBuf);
 		shoot_motor[SHOOT_GUN].check(&shoot_motor[SHOOT_GUN]);
