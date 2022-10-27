@@ -20,33 +20,33 @@ void StartRC_HeartTask(void const * argument)
 		Judge_RC_Transtate();
 				
 		//一开始通讯成功时，让云台自己回到机械角度2010位置
-//		if(rc_sensor.tran_state == DEV_BOOT)
-//		{
-//			if( Mechanical_Return() )
-//			{
-//				rc_sensor.tran_state = DEV_OFF;	
-//				Mec_Return_flag = True;
-//			}											
-//		}	
-//		
-//		//成功与遥控器通讯
-//		if(rc_sensor.work_state == DEV_ONLINE)
-//		{
-//			Cover_Awake();
-//			rc_sensor.check(&rc_sensor);	
-//			tick = 0;		
-//		}
-//		
-//		//失联----复位变量的值，卸力
-//		else
-//		{
-//			
-//			Cover_Sleep();
-//			Offline_Reset_Var();
-//			Car_Unload();
-//		
-//		}
-//		
+		if(rc_sensor.tran_state == DEV_BOOT)
+		{
+			if( Mechanical_Return() )
+			{
+				rc_sensor.tran_state = DEV_OFF;	
+				Mec_Return_flag = True;
+			}											
+		}	
+		
+		//成功与遥控器通讯
+		if( RC_ONLINE )
+		{
+			Cover_Awake();
+			rc_sensor.check(&rc_sensor);	
+			tick = 0;		
+		}
+		
+		//失联----复位变量的值，卸力
+		else
+		{
+			
+			Cover_Sleep();
+			Offline_Reset_Var();
+			Car_Unload();
+		
+		}
+		
     osDelay(1);
   }
   

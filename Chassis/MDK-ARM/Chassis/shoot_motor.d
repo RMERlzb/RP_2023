@@ -38,4 +38,7 @@ chassis\shoot_motor.o: ..\Application\ConfigLayer\rp_user_config.h
 chassis\shoot_motor.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\shoot_motor.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\shoot_motor.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\shoot_motor.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
+chassis\shoot_motor.o: ..\Application\ConfigLayer\rp_config.h
+chassis\shoot_motor.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 chassis\shoot_motor.o: ..\Application\ConfigLayer\rp_user_define.h

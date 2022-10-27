@@ -88,5 +88,7 @@ chassis\rc_heart_task.o: ..\Application\DeviceLayer\Servo\Servo.h
 chassis\rc_heart_task.o: ../Core/Inc/tim.h
 chassis\rc_heart_task.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\rc_heart_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\rc_heart_task.o: ..\Application\DeviceLayer\key\key.h
+chassis\rc_heart_task.o: ..\Application\ProtocolLayer\rc_protocol.h
 chassis\rc_heart_task.o: ..\Application\AlgorithmLayer\power_limit.h
 chassis\rc_heart_task.o: ..\Application\DeviceLayer\shoot\shoot.h

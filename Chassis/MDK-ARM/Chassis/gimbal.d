@@ -39,6 +39,9 @@ chassis\gimbal.o: ..\Application\ConfigLayer\rp_user_config.h
 chassis\gimbal.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\gimbal.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\gimbal.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\gimbal.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
+chassis\gimbal.o: ..\Application\ConfigLayer\rp_config.h
+chassis\gimbal.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 chassis\gimbal.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\gimbal.o: ..\Application\AlgorithmLayer\pid.h
 chassis\gimbal.o: ..\Application\ProtocolLayer\can_protocol.h
@@ -51,7 +54,6 @@ chassis\gimbal.o: ..\Application\DeviceLayer\slave\slave.h
 chassis\gimbal.o: ..\Application\DeviceLayer\judge_sensor\judge_sensor.h
 chassis\gimbal.o: ..\Application\ProtocolLayer\judge_potocol.h
 chassis\gimbal.o: ..\Application\DeviceLayer\judge_sensor\judge_sensor.h
-chassis\gimbal.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 chassis\gimbal.o: ..\Application\AlgorithmLayer\crc.h
 chassis\gimbal.o: ..\Application\DriverLayer\drv_uart.h
 chassis\gimbal.o: ..\Application\TaskLayer\Imu_Task.h
@@ -76,10 +78,10 @@ chassis\gimbal.o: E:\Keil5\ARM\ARMCC\Bin\..\include\math.h
 chassis\gimbal.o: ..\Application\DriverLayer\drv_io.h
 chassis\gimbal.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\gimbal.o: ..\Application\DeviceLayer\chassis\chassis.h
-chassis\gimbal.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
-chassis\gimbal.o: ..\Application\ConfigLayer\rp_config.h
 chassis\gimbal.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\gimbal.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\gimbal.o: ..\Application\DeviceLayer\key\key.h
+chassis\gimbal.o: ..\Application\ProtocolLayer\rc_protocol.h
 chassis\gimbal.o: ..\Application\AlgorithmLayer\power_limit.h
 chassis\gimbal.o: ..\Application\DeviceLayer\vision_sensor\vision_sensor.h
 chassis\gimbal.o: ..\Application\ProtocolLayer\vision_potocol.h

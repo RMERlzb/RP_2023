@@ -18,30 +18,68 @@ void Chassis_Init(void)
 void Chassis_MEC_Input(void)
 {
 	float speed[4] = {0};	
-	int16_t speed_limit[4] = {0};
 	
 	float speed_x = 0, speed_y = 0, speed_z = 0;
 	float angle_err = 0, speed_xx = 0, speed_yy = 0;
 	
 	speed_z = 0;
 	
-	if( gimbal_motor[GIMBAL_LOW].dir == Dir_Header )
-	{
-		speed_x = (rc_sensor.info)->ch3;
-		speed_y = (rc_sensor.info)->ch2;
-	}
-	else
-	{
-		speed_x = - (rc_sensor.info)->ch3;
-		speed_y = - (rc_sensor.info)->ch2;
 	
+	/*---------------------------云台在正方向-------------------------*/
+	if( gimbal_motor[GIMBAL_LOW].dir == Dir_Header )
+	{	
+			
+		//-------------------非键盘模式下
+		if( rc_sensor.dial->Keyboard_Mode == Flase )
+		{		
+			speed_x = (rc_sensor.info)->ch3;
+			speed_y = (rc_sensor.info)->ch2;
+		}
+				
+		//-------------------键盘模式下
+		else
+		{
+			speed_x = rc_sensor.info->Ch[3];
+			speed_y = rc_sensor.info->Ch[2]; 
+		}
+		
+	}
+	
+	/*---------------------------云台在反方向--------------------------*/
+	else
+	{		
+		//-------------------非键盘模式下
+		if( rc_sensor.dial->Keyboard_Mode == Flase )
+		{		
+			
+			speed_x = -(rc_sensor.info)->ch3;
+			speed_y = -(rc_sensor.info)->ch2;
+		}	
+		
+		//-------------------键盘模式下
+		else
+		{
+			speed_x = -rc_sensor.info->Ch[3];
+			speed_y = -rc_sensor.info->Ch[2]; 
+		}
+		
 	}
 	
 	
 	//机械模式下CH0直接赋值
-	if ( rc_sensor.dial->Mechanical_Mode == True )
-		speed_z = (rc_sensor.info)->ch0 * 0.6f;
-		
+	//---------------非键盘--------------------//
+	if( rc_sensor.dial->Keyboard_Mode == Flase )
+	{
+		if ( rc_sensor.dial->Mechanical_Mode == True )
+			speed_z = (rc_sensor.info)->ch0 * 0.6f;
+	}
+
+	//---------------键盘模式-----------------//
+	else
+	{
+		if ( rc_sensor.dial->Mechanical_Mode == True )
+			speed_z = rc_sensor.info->Ch[0] * 0.6f;
+	}		
 	
 	
 	
@@ -50,7 +88,7 @@ void Chassis_MEC_Input(void)
 	{
 		
 		//如果是小陀螺模式
-		if( rc_sensor.dial->Gryo_Mode == True )		
+		if( rc_sensor.dial->This_Gryo_Mode == True )		
 		{		
 			angle_err = ( gimbal_motor[GIMBAL_LOW].info->angle - mechanical_Z ) / Mec_To_Angle_Rate ;
 			
@@ -62,7 +100,13 @@ void Chassis_MEC_Input(void)
 			speed_xx = speed_x * cos (angle_err) + speed_y * sin (angle_err);
 			speed_yy = - speed_x * sin (angle_err) + speed_y * cos (angle_err);
 			
-			speed_z = Gryo_Speed_Z;	
+			//非键盘模式小陀螺旋转速度固定
+			if( rc_sensor.dial->Keyboard_Mode == Flase )
+				speed_z = Gryo_Speed_Z;	
+			
+			else
+				speed_z = Keyboard_SpeedZ; 	
+			
 			speed_x = speed_xx;		
 			speed_y = speed_yy;
 			
@@ -98,38 +142,47 @@ void Chassis_MEC_Input(void)
 		}												
 	}
 	
-	//----------------------送入功率限制------------------//
-	for( int i = 0; i < 4; i ++ )
-		speed_limit[i] = (int16_t)speed[i];
-	
-	Chassis_Motor_Power_Limit( (int16_t*) speed_limit );
-	
-	
-	(chassis_motor[CHAS_LF].speed_pid)->target = speed_limit[0];
-	(chassis_motor[CHAS_RF].speed_pid)->target = speed_limit[1];
-	(chassis_motor[CHAS_LB].speed_pid)->target = speed_limit[2];
-	(chassis_motor[CHAS_RB].speed_pid)->target = speed_limit[3];
+	(chassis_motor[CHAS_LF].speed_pid)->target = speed[0];
+	(chassis_motor[CHAS_RF].speed_pid)->target = speed[1];
+	(chassis_motor[CHAS_LB].speed_pid)->target = speed[2];
+	(chassis_motor[CHAS_RB].speed_pid)->target = speed[3];
 
 }
 
 void Chassis_Txbuf_FillIn(void)
 {
-
+  int16_t speed_limit[4] = {0}; 
+	
 	single_speedpid_cal(&chassis_motor[CHAS_LF]);
-	chassis_txbuf[0] = (int16_t) chassis_motor[CHAS_LF].speed_pid->out>>8;
-	chassis_txbuf[1] = (int16_t) chassis_motor[CHAS_LF].speed_pid->out;
-
+	speed_limit[0] = (int16_t)chassis_motor[CHAS_LF].speed_pid->out;
+	
 	single_speedpid_cal(&chassis_motor[CHAS_RF]);
-	chassis_txbuf[2] = (int16_t) chassis_motor[CHAS_RF].speed_pid->out>>8;
-	chassis_txbuf[3] = (int16_t) chassis_motor[CHAS_RF].speed_pid->out;
+	speed_limit[1] = (int16_t)chassis_motor[CHAS_RF].speed_pid->out;
 	
 	single_speedpid_cal(&chassis_motor[CHAS_LB]);
-	chassis_txbuf[4] = (int16_t) chassis_motor[CHAS_LB].speed_pid->out>>8;
-	chassis_txbuf[5] = (int16_t) chassis_motor[CHAS_LB].speed_pid->out;
+	speed_limit[2] = (int16_t)chassis_motor[CHAS_LB].speed_pid->out;
 	
 	single_speedpid_cal(&chassis_motor[CHAS_RB]);
-	chassis_txbuf[6] = (int16_t) chassis_motor[CHAS_RB].speed_pid->out>>8;
-	chassis_txbuf[7] = (int16_t) chassis_motor[CHAS_RB].speed_pid->out;
+	speed_limit[3] = (int16_t)chassis_motor[CHAS_RB].speed_pid->out;
+
+	//功率限制---电流
+	Chassis_Motor_Power_Limit(speed_limit);
+	
+	
+	chassis_txbuf[0] = speed_limit[0] >> 8;
+	chassis_txbuf[1] = speed_limit[0];
+
+	
+	chassis_txbuf[2] = speed_limit[1] >> 8;
+	chassis_txbuf[3] = speed_limit[1];
+	
+	
+	chassis_txbuf[4] = speed_limit[2] >> 8;
+	chassis_txbuf[5] = speed_limit[2];
+	
+	
+	chassis_txbuf[6] = speed_limit[3] >> 8;
+	chassis_txbuf[7] = speed_limit[3];
 }	
 
 

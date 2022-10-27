@@ -39,10 +39,10 @@ chassis\chassis.o: ..\Application\ConfigLayer\rp_user_config.h
 chassis\chassis.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\chassis.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\chassis.o: ..\Application\AlgorithmLayer\rp_math.h
-chassis\chassis.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\chassis.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
 chassis\chassis.o: ..\Application\ConfigLayer\rp_config.h
 chassis\chassis.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
+chassis\chassis.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\chassis.o: ..\Application\DriverLayer\drv_can.h
 chassis\chassis.o: ../Core/Inc/can.h
 chassis\chassis.o: ../Core/Inc/main.h
@@ -86,4 +86,6 @@ chassis\chassis.o: ..\Application\DeviceLayer\Servo\Servo.h
 chassis\chassis.o: ../Core/Inc/tim.h
 chassis\chassis.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\chassis.o: ..\Application\DeviceLayer\key\key.h
+chassis\chassis.o: ..\Application\ProtocolLayer\rc_protocol.h
 chassis\chassis.o: ..\Application\AlgorithmLayer\power_limit.h

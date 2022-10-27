@@ -37,4 +37,7 @@ chassis\motor.o: E:\Keil5\ARM\ARMCC\Bin\..\include\stdbool.h
 chassis\motor.o: ..\Application\ConfigLayer\rp_user_config.h
 chassis\motor.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\motor.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\motor.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
+chassis\motor.o: ..\Application\ConfigLayer\rp_config.h
+chassis\motor.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 chassis\motor.o: ..\Application\ConfigLayer\rp_user_define.h

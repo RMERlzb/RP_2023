@@ -60,6 +60,8 @@ chassis\slave.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\slave.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 chassis\slave.o: ..\Application\AlgorithmLayer\pid.h
 chassis\slave.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\slave.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
+chassis\slave.o: ..\Application\ConfigLayer\rp_config.h
 chassis\slave.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\slave.o: ..\Application\DeviceLayer\Imu\bmi.h
 chassis\slave.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
@@ -77,11 +79,11 @@ chassis\slave.o: ..\Application\DeviceLayer\shoot_motor\shoot_motor.h
 chassis\slave.o: ..\Application\DeviceLayer\slave\slave.h
 chassis\slave.o: ..\Application\TaskLayer\Imu_Task.h
 chassis\slave.o: ..\Application\DeviceLayer\chassis\chassis.h
-chassis\slave.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
-chassis\slave.o: ..\Application\ConfigLayer\rp_config.h
 chassis\slave.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\slave.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\slave.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\slave.o: ..\Application\DeviceLayer\key\key.h
+chassis\slave.o: ..\Application\ProtocolLayer\rc_protocol.h
 chassis\slave.o: ..\Application\AlgorithmLayer\power_limit.h
 chassis\slave.o: ..\Application\DeviceLayer\vision_sensor\vision_sensor.h
 chassis\slave.o: ..\Application\ProtocolLayer\vision_potocol.h

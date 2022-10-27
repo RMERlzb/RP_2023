@@ -62,6 +62,8 @@ chassis\judge_task.o: ..\Application\TaskLayer\Imu_Task.h
 chassis\judge_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\judge_task.o: ..\Application\AlgorithmLayer\pid.h
 chassis\judge_task.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\judge_task.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
+chassis\judge_task.o: ..\Application\ConfigLayer\rp_config.h
 chassis\judge_task.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\judge_task.o: ..\Application\DeviceLayer\Imu\bmi.h
 chassis\judge_task.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
@@ -79,11 +81,11 @@ chassis\judge_task.o: ..\Application\DeviceLayer\shoot_motor\shoot_motor.h
 chassis\judge_task.o: ..\Application\DeviceLayer\slave\slave.h
 chassis\judge_task.o: ..\Application\TaskLayer\Imu_Task.h
 chassis\judge_task.o: ..\Application\DeviceLayer\chassis\chassis.h
-chassis\judge_task.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
-chassis\judge_task.o: ..\Application\ConfigLayer\rp_config.h
 chassis\judge_task.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\judge_task.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\judge_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\judge_task.o: ..\Application\DeviceLayer\key\key.h
+chassis\judge_task.o: ..\Application\ProtocolLayer\rc_protocol.h
 chassis\judge_task.o: ..\Application\AlgorithmLayer\power_limit.h
 chassis\judge_task.o: ..\Application\DeviceLayer\vision_sensor\vision_sensor.h
 chassis\judge_task.o: ..\Application\ProtocolLayer\vision_potocol.h

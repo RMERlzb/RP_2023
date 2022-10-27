@@ -162,7 +162,7 @@ void imu_pid_init(void)
 	pid_val_init(imu_pid_Z.imu_speed_pid);
 	imu_pid_Z.imu_speed_pid->kp = 80;
 	imu_pid_Z.imu_speed_pid->ki = 1;
-	imu_pid_Z.imu_speed_pid->out_max = 20000;
+	imu_pid_Z.imu_speed_pid->out_max = Gimbal_OutMax;
 	imu_pid_Z.imu_speed_pid->integral_max = 10000;
 	
 	
@@ -179,7 +179,7 @@ void imu_pid_init(void)
 	pid_val_init(imu_pid_Y.imu_speed_pid);
 	imu_pid_Y.imu_speed_pid->kp = 20;
 	imu_pid_Y.imu_speed_pid->ki = 1;
-	imu_pid_Y.imu_speed_pid->out_max = 20000;
+	imu_pid_Y.imu_speed_pid->out_max = Gimbal_OutMax;
 	imu_pid_Y.imu_speed_pid->integral_max = 2000;
 	
 	
@@ -206,12 +206,23 @@ void imu_pid_cal(void)
 	//开启了视觉就不能再用遥控器控制云台
 	else
 	{
-		//陀螺仪模式下角度增量变化率，注意是负的
-		imu_pid_Z.imu_angle_pid->target += (rc_sensor.info)->ch0 * -0.0005f;
+		//-----------------陀螺仪模式--------------------//
+		if( rc_sensor_dial.Keyboard_Mode == Flase )
+		{
+			//陀螺仪模式下角度增量变化率，注意是负的
+			imu_pid_Z.imu_angle_pid->target += (rc_sensor.info)->ch0 * -0.0005f;
 			
-		imu_pid_Y.imu_angle_pid->target += (rc_sensor.info)->ch1 * -0.0008f ;
-	
+			imu_pid_Y.imu_angle_pid->target += (rc_sensor.info)->ch1 * -0.0008f;
+		}
 		
+		//-----------------键盘模式----------------------//
+		else
+		{
+			imu_pid_Z.imu_angle_pid->target += rc_sensor.info->Ch[0] * -0.0004f;
+			
+			imu_pid_Y.imu_angle_pid->target += rc_sensor.info->Ch[1] * -0.0004f;
+		}
+	
 	}
 	
 	
@@ -287,15 +298,15 @@ void Chassis_Input(void)
 	
 	//附新的值
 	machinery_pid_Z.gimbal_angle_pid->kp = 0.5;
-	machinery_pid_Z.gimbal_angle_pid->kd = 3;
-	machinery_pid_Z.gimbal_angle_pid->out_max = 1000;		
+	machinery_pid_Z.gimbal_angle_pid->kd = 2.5;
+	machinery_pid_Z.gimbal_angle_pid->out_max = 8000;		
 	
 	
 	//---------------------------------头尾跟随判断目标值-----------------------------//
 	if( rc_sensor_dial.Imu_Mode == True )
 	{
 		//说明取消了小陀螺
-		if( rc_sensor_dial.Gryo_Mode == Flase )
+		if( rc_sensor_dial.This_Gryo_Mode == Flase && rc_sensor_dial.Last_Gryo_Mode == True )
 		{
 			//跟头
 			if( gimbal_motor[GIMBAL_LOW].info->angle > 0 && gimbal_motor[GIMBAL_LOW].info->angle <= 4050 )
@@ -367,7 +378,7 @@ void machinery_pid_init(void)
 	pid_val_init(machinery_pid_Z.imu_speed_pid);
 	machinery_pid_Z.imu_speed_pid->kp = 50;
 	machinery_pid_Z.imu_speed_pid->ki = 1;
-	machinery_pid_Z.imu_speed_pid->out_max = 20000;
+	machinery_pid_Z.imu_speed_pid->out_max = Gimbal_OutMax;
 	machinery_pid_Z.imu_speed_pid->integral_max = 10000;
 	
 	
@@ -385,7 +396,7 @@ void machinery_pid_init(void)
 	pid_val_init(machinery_pid_Y.imu_speed_pid);
 	machinery_pid_Y.imu_speed_pid->kp = 10;
 	machinery_pid_Y.imu_speed_pid->ki = 1;
-	machinery_pid_Y.imu_speed_pid->out_max = 20000;
+	machinery_pid_Y.imu_speed_pid->out_max = Gimbal_OutMax;
 	machinery_pid_Y.imu_speed_pid->integral_max = 10000;
 	
 	
@@ -397,7 +408,15 @@ void mec_pid_cal(void)
 //----------------------------Y轴---------------------------//
 	
 	//----外环目标值---//	
-	machinery_pid_Y.gimbal_angle_pid->target += (rc_sensor.info)->ch1 * -0.005f;		
+
+	//--------------非键盘模式-------------//
+	if( rc_sensor_dial.Keyboard_Mode == Flase )	
+		machinery_pid_Y.gimbal_angle_pid->target += (rc_sensor.info)->ch1 * -0.005f;
+	
+	else
+		machinery_pid_Y.gimbal_angle_pid->target += rc_sensor.info->Ch[1] * -0.005f;
+	
+	
 	ConstrainFloat( &machinery_pid_Y.gimbal_angle_pid->target, gimbal_angle_Ymax, gimbal_angle_Ymin);	
 
 	

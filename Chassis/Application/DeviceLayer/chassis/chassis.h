@@ -10,6 +10,7 @@
 #include "RC_Dial_Task.h"
 #include "pid.h"
 #include "power_limit.h"
+#include "key.h"
 void Chassis_Init(void);
 void Chassis_MEC_Input(void);
 void Chassis_send(void);

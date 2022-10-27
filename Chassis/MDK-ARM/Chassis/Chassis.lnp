@@ -61,6 +61,7 @@
 "chassis\auto.o"
 "chassis\judge_sensor.o"
 "chassis\slave.o"
+"chassis\key.o"
 "chassis\rp_math.o"
 "chassis\pid.o"
 "chassis\crc.o"

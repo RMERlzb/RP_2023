@@ -54,7 +54,8 @@ char Shoot_Power_Judge(void)
 	
 	float max_heat = judge_sensor.info->game_robot_status.shooter_id1_17mm_cooling_limit;
 	
-	if( MyAbs_Int (now_heat - max_heat) <= 10 )
+
+	if( MyAbs_Int (now_heat - max_heat) <= 20 )
 		return 0;
 	
 	else

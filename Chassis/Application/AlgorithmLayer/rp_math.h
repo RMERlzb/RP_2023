@@ -14,7 +14,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-
+#include "rc_sensor.h"
 /* Exported macro ------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
@@ -51,5 +51,7 @@ void RampInt(int16_t target, int16_t measure, int16_t ramp, int16_t* err);
 //绝对值函数，不会强行改变传入的数字，但是宏定义的绝对值函数会强行改变
 int16_t MyAbs_Int(int16_t num);
 float MyAbs_Float(float num);
+
+float SF(float t,float *slopeFilter,float res);
 #endif
 

@@ -44,3 +44,5 @@ chassis\power_limit.o: ..\Application\AlgorithmLayer\crc.h
 chassis\power_limit.o: ..\Application\DriverLayer\drv_uart.h
 chassis\power_limit.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\power_limit.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\power_limit.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
+chassis\power_limit.o: ..\Application\ConfigLayer\rp_config.h

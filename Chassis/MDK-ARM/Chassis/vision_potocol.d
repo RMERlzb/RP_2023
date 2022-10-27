@@ -59,8 +59,9 @@ chassis\vision_potocol.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 chassis\vision_potocol.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\vision_potocol.o: ..\Application\AlgorithmLayer\pid.h
 chassis\vision_potocol.o: ..\Application\AlgorithmLayer\rp_math.h
-chassis\vision_potocol.o: ..\Application\DeviceLayer\motor\motor.h
+chassis\vision_potocol.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
 chassis\vision_potocol.o: ..\Application\ConfigLayer\rp_user_define.h
+chassis\vision_potocol.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\vision_potocol.o: ..\Application\DeviceLayer\Imu\bmi.h
 chassis\vision_potocol.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
 chassis\vision_potocol.o: ../Drivers/CMSIS/Include/core_cm4.h
@@ -80,10 +81,11 @@ chassis\vision_potocol.o: ..\Application\ProtocolLayer\judge_potocol.h
 chassis\vision_potocol.o: ..\Application\DeviceLayer\judge_sensor\judge_sensor.h
 chassis\vision_potocol.o: ..\Application\TaskLayer\Imu_Task.h
 chassis\vision_potocol.o: ..\Application\DeviceLayer\chassis\chassis.h
-chassis\vision_potocol.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
 chassis\vision_potocol.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\vision_potocol.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\vision_potocol.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\vision_potocol.o: ..\Application\DeviceLayer\key\key.h
+chassis\vision_potocol.o: ..\Application\ProtocolLayer\rc_protocol.h
 chassis\vision_potocol.o: ..\Application\AlgorithmLayer\power_limit.h
 chassis\vision_potocol.o: ..\Application\DeviceLayer\vision_sensor\vision_sensor.h
 chassis\vision_potocol.o: ..\Application\DeviceLayer\Servo\Servo.h

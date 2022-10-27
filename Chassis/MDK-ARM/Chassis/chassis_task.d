@@ -58,9 +58,9 @@ chassis\chassis_task.o: ..\Application\ConfigLayer\rp_user_config.h
 chassis\chassis_task.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\chassis_task.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\chassis_task.o: ..\Application\AlgorithmLayer\rp_math.h
-chassis\chassis_task.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\chassis_task.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
 chassis\chassis_task.o: ..\Application\ConfigLayer\rp_config.h
+chassis\chassis_task.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\chassis_task.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\chassis_task.o: ..\Application\DeviceLayer\gimbal_motor\gimbal_motor.h
 chassis\chassis_task.o: ..\Application\AlgorithmLayer\pid.h
@@ -88,4 +88,6 @@ chassis\chassis_task.o: ..\Application\DeviceLayer\Servo\Servo.h
 chassis\chassis_task.o: ../Core/Inc/tim.h
 chassis\chassis_task.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\chassis_task.o: ..\Application\DeviceLayer\key\key.h
+chassis\chassis_task.o: ..\Application\ProtocolLayer\rc_protocol.h
 chassis\chassis_task.o: ..\Application\AlgorithmLayer\power_limit.h

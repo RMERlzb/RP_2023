@@ -56,5 +56,5 @@ void Gimbal_Send(void);
 
 char Mechanical_Return(void);
 
-	
+void Cover_State_Judge(void);	
 #endif

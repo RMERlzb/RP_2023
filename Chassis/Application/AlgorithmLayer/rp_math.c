@@ -162,3 +162,16 @@ float MyAbs_Float(float num)
 	else
 		return (-num);
 }
+
+float SF(float t,float *slopeFilter,float res)
+{
+  for(int i = SF_LENGTH-1;i>0;i--)
+  {
+    slopeFilter[i] = slopeFilter[i-1];
+  }slopeFilter[0] = t;
+  for(int i = 0;i<SF_LENGTH;i++)
+  {
+    res += slopeFilter[i];
+  }
+	return (res/SF_LENGTH);
+}

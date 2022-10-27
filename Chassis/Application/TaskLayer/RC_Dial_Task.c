@@ -5,9 +5,17 @@ void StartRC_DialTask(void const * argument)
   for(;;)
   {
 		
-		if( rc_sensor.work_state == DEV_ONLINE )
+		if( RC_ONLINE )
+		{
+				
+			if( rc_sensor.dial->Keyboard_Mode == True )
+				KB_CTRL();
+				
 			rc_sensor.dial_jugde(&rc_sensor);
+			
+		}
 		
+
     osDelay(1);
   }
 

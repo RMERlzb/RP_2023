@@ -42,6 +42,9 @@ chassis\can_protocol.o: ..\Application\ConfigLayer\rp_user_config.h
 chassis\can_protocol.o: ..\Application\ConfigLayer\rp_driver_config.h
 chassis\can_protocol.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\can_protocol.o: ..\Application\AlgorithmLayer\rp_math.h
+chassis\can_protocol.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
+chassis\can_protocol.o: ..\Application\ConfigLayer\rp_config.h
+chassis\can_protocol.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 chassis\can_protocol.o: ..\Application\ConfigLayer\rp_user_define.h
 chassis\can_protocol.o: ..\Application\DeviceLayer\gimbal_motor\gimbal_motor.h
 chassis\can_protocol.o: ..\Application\DeviceLayer\shoot_motor\shoot_motor.h
@@ -49,7 +52,6 @@ chassis\can_protocol.o: ..\Application\DeviceLayer\slave\slave.h
 chassis\can_protocol.o: ..\Application\DeviceLayer\judge_sensor\judge_sensor.h
 chassis\can_protocol.o: ..\Application\ProtocolLayer\judge_potocol.h
 chassis\can_protocol.o: ..\Application\DeviceLayer\judge_sensor\judge_sensor.h
-chassis\can_protocol.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 chassis\can_protocol.o: ..\Application\AlgorithmLayer\crc.h
 chassis\can_protocol.o: ..\Application\DriverLayer\drv_uart.h
 chassis\can_protocol.o: ..\Application\TaskLayer\Imu_Task.h
@@ -77,11 +79,11 @@ chassis\can_protocol.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\can_protocol.o: ..\Application\ProtocolLayer\can_protocol.h
 chassis\can_protocol.o: ..\Application\TaskLayer\Imu_Task.h
 chassis\can_protocol.o: ..\Application\DeviceLayer\chassis\chassis.h
-chassis\can_protocol.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
-chassis\can_protocol.o: ..\Application\ConfigLayer\rp_config.h
 chassis\can_protocol.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\can_protocol.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\can_protocol.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\can_protocol.o: ..\Application\DeviceLayer\key\key.h
+chassis\can_protocol.o: ..\Application\ProtocolLayer\rc_protocol.h
 chassis\can_protocol.o: ..\Application\AlgorithmLayer\power_limit.h
 chassis\can_protocol.o: ..\Application\DeviceLayer\vision_sensor\vision_sensor.h
 chassis\can_protocol.o: ..\Application\ProtocolLayer\vision_potocol.h

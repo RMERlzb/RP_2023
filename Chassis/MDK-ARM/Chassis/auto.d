@@ -60,8 +60,9 @@ chassis\auto.o: E:\Keil5\ARM\ARMCC\Bin\..\include\string.h
 chassis\auto.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\auto.o: ..\Application\AlgorithmLayer\pid.h
 chassis\auto.o: ..\Application\AlgorithmLayer\rp_math.h
-chassis\auto.o: ..\Application\DeviceLayer\motor\motor.h
+chassis\auto.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
 chassis\auto.o: ..\Application\ConfigLayer\rp_user_define.h
+chassis\auto.o: ..\Application\DeviceLayer\motor\motor.h
 chassis\auto.o: ..\Application\DeviceLayer\Imu\bmi.h
 chassis\auto.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
 chassis\auto.o: ../Drivers/CMSIS/Include/core_cm4.h
@@ -81,10 +82,11 @@ chassis\auto.o: ..\Application\ProtocolLayer\judge_potocol.h
 chassis\auto.o: ..\Application\DeviceLayer\judge_sensor\judge_sensor.h
 chassis\auto.o: ..\Application\TaskLayer\Imu_Task.h
 chassis\auto.o: ..\Application\DeviceLayer\chassis\chassis.h
-chassis\auto.o: ..\Application\DeviceLayer\Sensor\rc_sensor.h
 chassis\auto.o: ..\Application\DeviceLayer\gimbal\gimbal.h
 chassis\auto.o: ..\Application\TaskLayer\RC_Dial_Task.h
 chassis\auto.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\auto.o: ..\Application\DeviceLayer\key\key.h
+chassis\auto.o: ..\Application\ProtocolLayer\rc_protocol.h
 chassis\auto.o: ..\Application\AlgorithmLayer\power_limit.h
 chassis\auto.o: ..\Application\DeviceLayer\vision_sensor\vision_sensor.h
 chassis\auto.o: ..\Application\DeviceLayer\Servo\Servo.h

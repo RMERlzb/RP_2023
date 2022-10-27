@@ -31,6 +31,108 @@ void Shoot_Init(void)
 
 
 
+void Friction_Input(int16_t v)
+{
+	char temR,temL;
+
+	int16_t tem_err_L,tem_err_R;
+	
+	/*获得温度误差 30度为准*/
+	temL = shoot_motor[SHOOT_LRUB].info->temperature;
+	temR = shoot_motor[SHOOT_RRUB].info->temperature;
+		
+	tem_err_L = temL - 30;
+	tem_err_R = temR - 30;
+	/*温度处理*/
+	
+	if(v == 0)
+	{
+		shoot_motor[SHOOT_LRUB].speed_pid->target = 0;
+		shoot_motor[SHOOT_RRUB].speed_pid->target = 0;
+	}
+	else
+	{
+//		v = 2000;
+		shoot_motor[SHOOT_LRUB].speed_pid->target = -(v - Temp * tem_err_L/10);
+		shoot_motor[SHOOT_RRUB].speed_pid->target =  (v - Temp * tem_err_R/10);			
+	}
+
+}
+
+
+
+float shoot_limit,
+
+	    get_pre_shoot_sp,
+      get_pre_shoot_limit;
+      
+int16_t FRI_SPEED_TAR = 0,
+			  speed_high_flg = 0,
+        shoot_adopt_flg = 0;
+
+char speed_limit_change = 0,
+	
+     speed_low_num = 0,
+		 hig_adopt_flg = 0,
+	   low_adopt_flg = 0;
+
+
+void Friction_Open(void)
+{
+  int16_t Fri_Speed = 0;
+
+	/*失联处理*/
+	if(JUDGE_OFFLINE) Fri_Speed = Fri_15;
+	
+	/*在线处理*/
+	else
+	{	
+		/*查表速度*/
+		switch((uint16_t)shoot_limit)
+		{
+			case 0:
+				Fri_Speed = 0;
+				break;
+			case 15:
+				Fri_Speed = Fri_15;
+				break;
+			case 18:
+				Fri_Speed = Fri_18;
+				break;		
+			case 20:
+				Fri_Speed = Fri_20;
+				break;	
+			case 22:
+				Fri_Speed = Fri_22;
+				break;			
+			case 30:
+				Fri_Speed = Fri_30;
+				break;	
+			default:
+				if(shoot_limit < 40 && shoot_limit)
+					Fri_Speed = Fri_15 + (shoot_limit - 15) * 110;
+				else
+					Fri_Speed = Fri_30;
+				break;
+		}
+		
+		FRI_SPEED_TAR = Fri_Speed;
+		
+		/*超速处理 过低处理*/
+		Fri_Speed = Fri_Speed + speed_high_flg;
+		
+		Fri_Speed = Fri_Speed + shoot_adopt_flg * 5;
+		
+		if(shoot_limit == 0)Fri_Speed = 0;
+		
+	}
+
+//	Fri_Speed = shot_sp;
+	
+	Friction_Input(Fri_Speed);
+	
+}
+
 
 void FricWheel_WorkState_Switch(void)
 {
@@ -46,9 +148,11 @@ void FricWheel_WorkState_Switch(void)
 	{
 		shoot_motor[SHOOT_LRUB].speed_pid->target = -Shoot_Vmax;		
 		
-		shoot_motor[SHOOT_RRUB].speed_pid->target = Shoot_Vmax;		
-	}
+		shoot_motor[SHOOT_RRUB].speed_pid->target = Shoot_Vmax;			
 		
+	}
+	
+//	Friction_Open();	
 }
 
 
@@ -109,7 +213,7 @@ void Block_Manage(void)
 			if( MyAbs_Float(shoot_motor[SHOOT_DIAL].info->speed) >= 200 && \
 					dial->Continue_Shoot_BlockFlag == Flase )
 				dial->ContinueShoot_Block_ToggleDir = Speed_Block_Cnt = 0;	
-			
+			 
 			
 			
 			
@@ -247,7 +351,6 @@ void Block_Manage(void)
 	
 }
 
-char flag = 0;
 
 
 void Shoot(void)
@@ -257,7 +360,6 @@ void Shoot(void)
 	
 	FricWheel_WorkState_Switch();
 	
-	flag = Shoot_Power_Judge();
 	
 	//不超功率的情况下才更新PID的数据
 	if( Shoot_Power_Judge() == 1 )
@@ -281,17 +383,22 @@ void Shoot(void)
 		//连续发
 		if( dial->Continue_ShootEnable == True && dial->Continue_Shoot_BlockFlag == Flase )
 		{
+			
 			shoot_motor[SHOOT_DIAL].speed_pid->target = -Shoot_Vmax;
+			
 			shoot_motor[SHOOT_DIAL].speed_pid_update(&shoot_motor[SHOOT_DIAL]);
 			
 		}
+		
+		Block_Manage();			
 			
 	}
 	
-	//如果超功率，速度PID的目标值为0，角度PID由于目标值不变所以不用改动
+	//如果超功率，速度PID的目标值为0，角度PID由于目标值不变所以不用改动，速度为0持续一小段时间
 	else
 	{
 		shoot_motor[SHOOT_DIAL].speed_pid->target = 0;
+		
 	}
 	
 }	
@@ -341,6 +448,7 @@ void Shoot_Txbuf_FillIn(void)
 
 void Shoot_Send(void)
 {
+	
 	
 	Shoot_Txbuf_FillIn();
 	

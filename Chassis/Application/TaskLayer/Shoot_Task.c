@@ -7,12 +7,11 @@ void StartShoot_Task(void const * argument)
 	
   for(;;)
   {
-		if( rc_sensor.work_state == DEV_ONLINE )
+		if( RC_ONLINE )
 		{
 			
-			Shoot();		
-			
-			Block_Manage();		
+			Shoot();	
+		
 			
 			Shoot_Send();
 			
